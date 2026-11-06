@@ -1,6 +1,6 @@
 # Programming Conventions
 
-Sourced, opinionated conventions for writing **Bash, Go, Kotlin, Next.js and TypeScript** code.
+Sourced, opinionated conventions for writing **Bash, Go, Kotlin, Next.js, Python and TypeScript** code.
 
 Each set starts from what the language, its compiler and its official tools already do. It adds configuration only where a default does not fit, and it records the reason. Where the official guides disagree, the notes say which source wins and why.
 
@@ -21,6 +21,7 @@ These are one developer's choices. The notes flag the places where they go beyon
 | Go | [`golang-conventions/`](golang-conventions/) | Tooling, project layout, naming and style, package and API design, types, errors, concurrency and context, testing, service practices, modern Go by release |
 | Kotlin | [`kotlin-conventions/`](kotlin-conventions/) | Gradle and static checks, packages, naming, idiomatic use, null safety and types, API design, errors, coroutines and Flow, testing, platform practices (Android, Compose, multiplatform, Spring), modern Kotlin by release |
 | Next.js | [`nextjs-convention/`](nextjs-convention/) | App Router projects: routing, Server and Client Components, data fetching and caching, forms, errors and loading, metadata, styling and assets, security, testing, deployment and self-hosting, version policy |
+| Python | [`python-conventions/`](python-conventions/) | Tooling with uv, Ruff, mypy and pytest, project layout, naming and style, idiomatic use, types and data modeling, API and class design, errors and logging, concurrency and async, testing, security and dependencies, platform practices (scripts and Django), modern Python by release |
 | TypeScript | [`typescript-convention/`](typescript-convention/) | tsconfig, types and type design, validating external data, modules, naming, functions and async code, errors, testing, TypeScript in React, modern TypeScript by release |
 
 ## How each set is organized
@@ -52,6 +53,7 @@ Several ideas recur across the principles notes:
 
 - **Go:** [named parameters and results](golang-conventions/02-named-parameters-and-results.md) is a labelled personal override. It names every parameter and result, and the note says it deviates on purpose from the Go team's guidance on unnamed results.
 - **Bash:** the [principles note](bash-conventions/01-principles-and-sources.md#decisions-to-review) lists the decisions made where the sources disagree, and the place to change each one.
+- **Python:** the [principles note](python-conventions/01-principles-and-sources.md#decisions-to-review) lists twelve decisions made where the sources disagree or leave a choice open, such as an 88-column line length instead of PEP 8's 79.
 
 Read these as one developer's choices, not as consensus.
 
@@ -67,6 +69,7 @@ Each note ends with its sources and the date they were read. The main upstream g
 - **Go:** [Effective Go](https://go.dev/doc/effective_go), [Go Code Review Comments](https://go.dev/wiki/CodeReviewComments), the [Google Go Style Guide](https://google.github.io/styleguide/go/) and the [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md).
 - **Kotlin:** the [Kotlin coding conventions](https://kotlinlang.org/docs/coding-conventions.html), the [Android Kotlin style guide](https://developer.android.com/kotlin/style-guide) and the [library authors' guidelines](https://kotlinlang.org/docs/api-guidelines-introduction.html).
 - **Next.js:** the [Next.js documentation](https://nextjs.org/docs) and the [support policy](https://nextjs.org/support-policy).
+- **Python:** [PEP 8](https://peps.python.org/pep-0008/) and [PEP 257](https://peps.python.org/pep-0257/), the [Python Developer's Guide](https://devguide.python.org/versions/), and the documentation of [uv](https://docs.astral.sh/uv/), [Ruff](https://docs.astral.sh/ruff/), [mypy](https://mypy.readthedocs.io/) and [pytest](https://docs.pytest.org/).
 - **TypeScript:** the [TypeScript Handbook](https://www.typescriptlang.org/docs/) and the [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html).
 
 ## Contributing

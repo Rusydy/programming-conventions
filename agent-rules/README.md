@@ -9,10 +9,11 @@ These files make Claude Code follow the conventions in this repository in every 
 | `rules/bash.md` | `~/.claude/rules/bash.md` | Bash, loaded when a shell file is read or edited |
 | `rules/golang.md` | `~/.claude/rules/golang.md` | Go, loaded for `*.go` and `go.mod` |
 | `rules/kotlin.md` | `~/.claude/rules/kotlin.md` | Kotlin, loaded for `*.kt`, `*.kts` and `libs.versions.toml` |
+| `rules/python.md` | `~/.claude/rules/python.md` | Python, loaded for `*.py`, `*.pyi` and `pyproject.toml` |
 | `rules/typescript.md` | `~/.claude/rules/typescript.md` | TypeScript, loaded for `*.ts`, `*.tsx`, `*.mts`, `*.cts` and `tsconfig.json` |
 | `CLAUDE-block.md` | Append to `~/.claude/CLAUDE.md` | An index that loads in every session and says which rule to read first |
 
-Next.js has no digest. Its notes apply through the bundled Next.js docs and the project's `AGENTS.md`, as [nextjs-convention](../nextjs-convention/01-principles-and-sources.md) explains. Python is not in this repository yet.
+Next.js has no digest. Its notes apply through the bundled Next.js docs and the project's `AGENTS.md`, as [nextjs-convention](../nextjs-convention/01-principles-and-sources.md) explains. Python's notes are in [python-conventions](../python-conventions/01-principles-and-sources.md).
 
 ## How the rules load
 
