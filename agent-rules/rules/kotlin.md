@@ -9,7 +9,7 @@ paths:
 ---
 # Kotlin conventions (every project)
 
-Write idiomatic, readable Kotlin. Follow the language's and the platform's conventions instead of inventing configuration ("convention over configuration"). This file is a digest of the notes in the `kotlin-conventions` folder of the programming-conventions repository, which hold the reasons, sources and compiled examples. Read the matching note before a large change or when a rule here is unclear. The digest was synced with the notes on 2026-10-26; update it by hand whenever a note changes.
+Write idiomatic, readable Kotlin. Follow the language's and the platform's conventions instead of inventing configuration ("convention over configuration"). This file is a digest of the notes in the `kotlin-conventions` folder of the programming-conventions repository, which hold the reasons, sources and compiled examples. Read the matching note before a large change or when a rule here is unclear. The digest was synced with the notes on 2026-11-06; update it by hand whenever a note changes.
 
 ## How to apply
 
@@ -81,7 +81,7 @@ Write idiomatic, readable Kotlin. Follow the language's and the platform's conve
 - `suspend` functions are main-safe: the class that blocks uses `withContext(dispatcher)`. A function that returns `Flow` is not `suspend`. One-shot calls are `suspend`; streams are `Flow`.
 - Cancellation is cooperative: `ensureActive()` in long loops. Never swallow `CancellationException`.
 - `flow { }` is cold: share it with `stateIn` or `shareIn`, change context with `flowOn`, never `emit` from another context (use `channelFlow` or `callbackFlow`, and end `callbackFlow` with `awaitClose`), handle upstream errors with `catch { }`.
-- Expose a read-only `StateFlow` and keep the `MutableStateFlow` private (explicit backing field on 2.4+). Build UI state with `stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), initialValue)`. Collect with `collectAsStateWithLifecycle()` on Android and `collectAsState()` in common code.
+- Expose a read-only `StateFlow` and keep the `MutableStateFlow` private (explicit backing field on 2.4+). Build UI state with `stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), initialValue)`. Collect with `collectAsStateWithLifecycle()`; it also works in common code, through `lifecycle-runtime-compose`.
 - Shared mutable state: thread-safe structures, thread confinement or a `Mutex` with `withLock { }`.
 
 ## Testing
