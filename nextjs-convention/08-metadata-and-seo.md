@@ -1,14 +1,5 @@
 # Next.js Metadata and SEO
 
-- Responsibility: engineering
-- Area/system: nextjs
-- Keywords: Metadata API, metadata, generateMetadata, metadataBase, title template, canonical, alternates, openGraph, twitter card, opengraph-image, ImageResponse, favicon, icon, sitemap.ts, robots.ts, MetadataRoute, JSON-LD, structured data, html lang, streaming metadata, htmlLimitedBots, viewport, multi-domain, SEO
-- Aliases: Next.js SEO, metadata Next.js, sitemap Next.js, robots.txt Next.js, OG image Next.js, title dan description halaman, SEO website Next.js, lang html
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [layout and routing](03-project-layout-and-routing.md), [data fetching and caching](05-data-fetching-and-caching.md), [styling, images, fonts and scripts](09-styling-images-fonts-and-scripts.md).
-
 ## Summary
 
 Describe every public page with the Metadata API and the metadata file conventions. The root layout sets the language, the base URL and the title template, and each page sets its own title and description. Metadata does not read request data, and each brand gets its own metadata through a route group.

@@ -1,14 +1,5 @@
 # Next.js Styling, Images, Fonts and Scripts
 
-- Responsibility: engineering
-- Area/system: nextjs
-- Keywords: Tailwind CSS, CSS Modules, global CSS, next/image, Image, remotePatterns, localPatterns, qualities, preload, priority, sizes, fill, next/font, Geist, Inter, variable font, next/script, @next/third-parties, GoogleAnalytics, Google Tag Manager, public folder, assetPrefix, consent, line-clamp
-- Aliases: Next.js styling, optimasi gambar Next.js, font Next.js, Google Analytics Next.js, script pihak ketiga Next.js, CSS Next.js, Tailwind Next.js, next/image config
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [setup and tooling](02-project-setup-and-tooling.md), [Server and Client Components](04-server-and-client-components.md), [metadata and SEO](08-metadata-and-seo.md), [security](10-security.md).
-
 ## Summary
 
 Use Tailwind CSS for most styling and CSS Modules for the rest. Use the built-in `next/image`, `next/font` and `next/script` components instead of raw tags, and keep every remote image host and every third-party script on an explicit allow-list.

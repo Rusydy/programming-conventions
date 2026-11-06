@@ -1,14 +1,5 @@
 # Go Testing
 
-- Responsibility: engineering
-- Area/system: golang
-- Keywords: testing, table-driven tests, subtests, t.Run, t.Parallel, go-cmp, cmp.Diff, httptest, fakes, mocks, testdata, golden files, fuzzing, benchmarks, b.Loop, synctest, race detector, coverage, testify, assert library, golang/mock, go.uber.org/mock, TEST_DATABASE_URL, throwaway database, service container
-- Aliases: Go test best practice, unit test Go, table test Go, mock Go, assert library Go, pengujian Go
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [named parameters and results](02-named-parameters-and-results.md), [package and API design](06-package-and-api-design.md), [error handling](08-error-handling.md), [concurrency and context](09-concurrency-and-context.md), [tooling](03-project-setup-and-tooling.md).
-
 ## Summary
 
 Test with the standard `testing` package. Write table-driven tests with clear failure messages, compare whole values with `go-cmp`, prefer real implementations and small fakes over mocks, and run every test with the race detector. The Go team advises against assertion libraries.

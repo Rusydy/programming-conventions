@@ -1,14 +1,5 @@
 # TypeScript Types and Type Design
 
-- Responsibility: engineering
-- Area/system: typescript
-- Keywords: any, unknown, interface, type alias, union type, discriminated union, exhaustive switch, assertNever, satisfies, as const, readonly, enum alternative, string literal union, null, undefined, optional property, type assertion, non-null assertion, type predicate, generics, utility types, conditional types, mapped types, money, minor units, decimal.js, Date, Temporal, Intl.NumberFormat
-- Aliases: tipe TypeScript, TypeScript type design, interface vs type, avoid any, hindari any, discriminated union, pengganti enum, TypeScript generics guidelines, uang di TypeScript, type safety
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [tsconfig](03-tsconfig.md), [runtime validation](05-runtime-validation-and-external-data.md), [error handling](09-error-handling.md), [testing](10-testing.md), [TypeScript in React](11-typescript-in-react.md).
-
 ## Summary
 
 Describe values with the narrowest type that is true. Use `unknown` for data of unknown shape, `interface` for object shapes, unions instead of `enum` and flags, and derive a type from its source instead of copying it. Keep assertions and type-level cleverness for the few cases that need them.

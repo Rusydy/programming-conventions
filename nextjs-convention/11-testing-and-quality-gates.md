@@ -1,14 +1,5 @@
 # Next.js Testing and Quality Gates
 
-- Responsibility: engineering
-- Area/system: nextjs
-- Keywords: testing, quality gates, typecheck, ESLint, next build, Vitest, Jest, Playwright, Cypress, end-to-end test, unit test, component test, async Server Components, instant helper, smoke test, Lighthouse, Core Web Vitals, useReportWebVitals, bundle analyzer, next experimental-analyze, jsx-a11y, accessibility, .env.test
-- Aliases: Next.js testing, tes Next.js, CI Next.js, quality gate Next.js, Playwright Next.js, Vitest Next.js, uji website Next.js, bundle size Next.js
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [setup and tooling](02-project-setup-and-tooling.md), [Server and Client Components](04-server-and-client-components.md), [data fetching and caching](05-data-fetching-and-caching.md), [security](10-security.md).
-
 ## Summary
 
 Every pull request passes the same gates: type check, lint, format check, `next build` and tests. Unit tests cover pure logic and client components. End-to-end tests cover routes and journeys, because async Server Components do not work well in unit tests. Performance checks run against a production build.

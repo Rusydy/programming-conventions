@@ -1,14 +1,5 @@
 # Next.js Deployment and Self-Hosting
 
-- Responsibility: engineering
-- Area/system: nextjs
-- Keywords: self-hosting, Docker, standalone output, output standalone, server.js, HOSTNAME, PORT, reverse proxy, nginx, X-Accel-Buffering, streaming, runtime environment variables, build ID, deploymentId, version skew, cache handler, cacheHandlers, cacheMaxMemorySize, NEXT_SERVER_ACTIONS_ENCRYPTION_KEY, graceful shutdown, SIGTERM, health check, Node.js LTS, .dockerignore, adapters
-- Aliases: deploy Next.js, Docker Next.js, hosting Next.js, nginx Next.js, Dockerfile Next.js, standalone Next.js, self host Next.js, deployment website
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [setup and tooling](02-project-setup-and-tooling.md), [data fetching and caching](05-data-fetching-and-caching.md), [security](10-security.md).
-
 ## Summary
 
 Ship a Next.js app as a Docker image built from `output: 'standalone'`, run it as a non-root user behind a reverse proxy, and build the image once for every environment. Several instances need a shared cache handler, one Server Actions encryption key and a deployment identifier.

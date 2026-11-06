@@ -1,14 +1,5 @@
 # Named Parameters and Results (Personal Override)
 
-- Responsibility: engineering
-- Area/system: golang
-- Keywords: named parameters, named results, named return values, naked return, godoc, nonamedreturns, personal override, function signature, deferred closure, shadowing, namecheck, unused parameter, blank identifier, unparam
-- Aliases: name every parameter, name every return value, return value names, penamaan parameter dan return, single result parentheses, unnamed result
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles and sources](01-principles-and-sources.md), [error handling](08-error-handling.md), [static checks](03-project-setup-and-tooling.md#static-checks).
-
 ## Summary
 
 Every Go function, method, interface method, function type and function literal names each parameter and each result. A single result also goes in parentheses. This rule deviates on purpose from the Go team's guidance, which prefers unnamed results unless the names add information. Every code example in this folder follows the rule.

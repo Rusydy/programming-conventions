@@ -1,14 +1,5 @@
 # TypeScript Functions, Classes and Async Code
 
-- Responsibility: engineering
-- Area/system: typescript
-- Keywords: function declaration, arrow function, options object, boolean parameter, default parameter, overloads, return type, immutability, toSorted, structuredClone, class, parameter properties, override, async, await, Promise.all, Promise.allSettled, floating promises, no-misused-promises, AbortSignal.timeout, require-await
-- Aliases: fungsi TypeScript, TypeScript async await, promise TypeScript, kelas TypeScript, options object, parameter boolean, floating promise, TypeScript function style
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [types and type design](04-types-and-type-design.md), [error handling](09-error-handling.md), [TypeScript in React](11-typescript-in-react.md), [runtime validation](05-runtime-validation-and-external-data.md).
-
 ## Summary
 
 Write small functions with named options instead of long parameter lists, avoid mutation, and use classes only where an object needs identity or a lifecycle. Handle every promise, start independent work together, and give every network call a timeout.

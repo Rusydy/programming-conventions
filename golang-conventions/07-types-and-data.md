@@ -1,14 +1,5 @@
 # Go Types and Data Handling
 
-- Responsibility: engineering
-- Area/system: golang
-- Keywords: zero value, nil slice, nil map, slices package, maps package, strings.Builder, enum, iota, time.Time, time.Duration, UTC, RFC 3339, money, decimal, float64, minor units, JSON, omitzero, omitempty, struct tags, new(expr), unsafe, loc=UTC, timestamptz, shopspring decimal, existing table time zone
-- Aliases: Go data types best practice, Go slices and maps, Go enum pattern, Go money handling, Go time handling, Go JSON tags, tipe data Go
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [naming and style](05-naming-comments-and-style.md), [package and API design](06-package-and-api-design.md), [error handling](08-error-handling.md), [testing](10-testing.md), [modern Go by release](12-modern-go-by-release.md).
-
 ## Summary
 
 Use the zero value, nil slices and the `slices` and `maps` packages. Model enums as typed constants, keep instants in UTC as `time.Time`, never store money as `float64`, and tag serialised fields explicitly.

@@ -1,14 +1,5 @@
 # Go Concurrency and Context
 
-- Responsibility: engineering
-- Area/system: golang
-- Keywords: goroutine, context, cancellation, errgroup, WaitGroup.Go, channel, mutex, atomic, data race, race detector, goroutine leak, synctest, graceful shutdown, select, worker pool, WithoutCancel, signal.NotifyContext, automaxprocs, GOMAXPROCS
-- Aliases: Go concurrency best practice, Go context usage, goroutine leak prevention, Go mutex vs channel, concurrent Go, konkurensi Go
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [package and API design](06-package-and-api-design.md), [error handling](08-error-handling.md), [testing](10-testing.md), [service practices](11-service-practices.md).
-
 ## Summary
 
 Prefer synchronous code. When you start a goroutine, give it an owner, a stop condition and a context. Pick the simplest synchronisation (a mutex or a channel), run the race detector, and test concurrent code without sleeping.

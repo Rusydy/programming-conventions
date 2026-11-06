@@ -1,14 +1,5 @@
 # Next.js Security
 
-- Responsibility: engineering
-- Area/system: nextjs
-- Keywords: environment variables, NEXT_PUBLIC, secrets, Data Access Layer, DAL, DTO, server-only, taint, Server Actions security, authorisation, IDOR, CSRF, allowedOrigins, NEXT_SERVER_ACTIONS_ENCRYPTION_KEY, proxy.ts, middleware bypass, dangerouslySetInnerHTML, XSS, sanitiser, Content Security Policy, CSP, nonce, SRI, remotePatterns, SSRF, security release, CVE, patch
-- Aliases: keamanan Next.js, Next.js security checklist, secret di Next.js, CSP Next.js, patch keamanan Next.js, XSS Next.js, rilis keamanan Next.js
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [setup and tooling](02-project-setup-and-tooling.md), [Server and Client Components](04-server-and-client-components.md), [mutations and forms](06-mutations-and-forms.md), [styling, images, fonts and scripts](09-styling-images-fonts-and-scripts.md), [deployment](12-deployment-and-self-hosting.md).
-
 ## Summary
 
 Keep secrets and data access on the server, behind one data layer that authorises every read and write. Treat Server Functions, `proxy.ts` and Route Handlers as the entry points to audit, sanitise any HTML that you did not write, and apply Next.js patch releases within fixed deadlines. From July to October 2026, image handling or Server Actions appeared in every security release.

@@ -1,14 +1,5 @@
 # Go Package and API Design
 
-- Responsibility: engineering
-- Area/system: golang
-- Keywords: interfaces, accept interfaces return structs, constructors, functional options, options struct, receivers, pointer receiver, embedding, generics, zero value, init, global state, dependency injection, Impl suffix, Java-style Go, compile-time interface check
-- Aliases: desain API Go, Go interface design, Go constructor pattern, Go dependency injection, Go package design, idiomatic Go design
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [project layout](04-project-layout.md), [naming and style](05-naming-comments-and-style.md), [types and data](07-types-and-data.md), [error handling](08-error-handling.md), [testing](10-testing.md).
-
 ## Summary
 
 Export little, define interfaces where they are used, return concrete types, pass dependencies through constructors and keep package-level state out. Small, concrete packages stay easier to read and to test than layered abstractions.

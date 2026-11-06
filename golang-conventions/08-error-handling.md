@@ -1,14 +1,5 @@
 # Go Error Handling
 
-- Responsibility: engineering
-- Area/system: golang
-- Keywords: errors, error wrapping, fmt.Errorf, %w, errors.Is, errors.As, errors.AsType, errors.Join, sentinel errors, custom error types, panic, handle errors once, errcheck, defer Close, log once, RFC 9457, problem details, application/problem+json, error response format
-- Aliases: error handling Go, Go wrap error, Go sentinel error, Go custom error, panic vs error, penanganan error Go
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [named parameters and results](02-named-parameters-and-results.md), [package and API design](06-package-and-api-design.md), [concurrency and context](09-concurrency-and-context.md), [testing](10-testing.md), [service practices](11-service-practices.md).
-
 ## Summary
 
 Check every error, add context where it helps, and handle each error once: either return it or deal with it, never both. Callers inspect errors with `errors.Is` and `errors.As`, not with string matching. Log at the boundary of the program.

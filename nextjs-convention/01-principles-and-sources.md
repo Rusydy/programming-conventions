@@ -1,14 +1,5 @@
 # Next.js Principles and Sources of Truth
 
-- Responsibility: engineering
-- Area/system: nextjs
-- Keywords: Next.js, App Router, convention over configuration, best practice, create-next-app defaults, source precedence, version baseline, Active LTS, Maintenance LTS, support policy, security release, upgrade policy, Cache Components, AGENTS.md, bundled docs, node_modules/next/dist/docs
-- Aliases: Next.js conventions overview, nextjs-convention, Next.js coding standard, how to write Next.js, prinsip Next.js, standar Next.js, panduan Next.js
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [project setup and tooling](02-project-setup-and-tooling.md), [data fetching and caching](05-data-fetching-and-caching.md), [security](10-security.md), [modern Next.js by release](13-modern-nextjs-by-release.md).
-
 ## Summary
 
 These principles apply to every Next.js project. They put the conventions of the framework ahead of project-specific configuration, so that any Next.js developer can read the code on the first day. A precedence list settles disagreements between sources, and a version policy says which release a project runs.

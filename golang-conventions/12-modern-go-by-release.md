@@ -1,14 +1,5 @@
 # Modern Go by Release
 
-- Responsibility: engineering
-- Area/system: golang
-- Keywords: Go 1.18, Go 1.19, Go 1.20, Go 1.21, Go 1.22, Go 1.23, Go 1.24, Go 1.25, Go 1.26, Go 1.27, generics, slog, slices, maps, range over int, iterators, WaitGroup.Go, synctest, errors.AsType, new(expr), go fix, modernize, generic methods, json v2, uuid, supported releases, existing projects
-- Aliases: what is new in Go, Go release features, modern idioms Go, Go version cheat sheet, upgrade Go idioms, fitur Go per versi
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [tooling](03-project-setup-and-tooling.md), [types and data](07-types-and-data.md), [error handling](08-error-handling.md), [concurrency and context](09-concurrency-and-context.md), [testing](10-testing.md).
-
 ## Summary
 
 This cheat sheet lists the language and library features, release by release, that replace older idioms. New code uses the modern form. The latest stable release is Go 1.27 (2026-08-19), and Go 1.26 is still supported. Refresh this note after each release, about every six months.

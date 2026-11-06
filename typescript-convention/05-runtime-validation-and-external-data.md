@@ -1,14 +1,5 @@
 # TypeScript Runtime Validation and External Data
 
-- Responsibility: engineering
-- Area/system: typescript
-- Keywords: runtime validation, Zod, schema, safeParse, parse, z.infer, z.flattenError, z.treeifyError, z.prettifyError, zod/mini, Valibot, ArkType, Yup, Joi, trust boundary, unknown, JSON.parse, response.json, FormData, environment variables, process.env, NEXT_PUBLIC, server-only, DTO, data access layer
-- Aliases: validasi data TypeScript, validasi runtime, Zod schema, validasi form, validasi env, parse data eksternal, TypeScript trust boundary, type erasure
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [types and type design](04-types-and-type-design.md), [error handling](09-error-handling.md), [Next.js data fetching](../nextjs-convention/05-data-fetching-and-caching.md#where-to-fetch), [Next.js forms](../nextjs-convention/06-mutations-and-forms.md#validation-and-errors), [Next.js security](../nextjs-convention/10-security.md#environment-variables).
-
 ## Summary
 
 TypeScript types disappear at run time, so a type annotation proves nothing about data that comes from outside the program. Treat every external value as `unknown`, parse it with a Zod schema at the boundary, and use the type that the schema infers. One schema then gives the validator and the type.

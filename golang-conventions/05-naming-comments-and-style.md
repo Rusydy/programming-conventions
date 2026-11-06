@@ -1,14 +1,5 @@
 # Go Naming, Comments and Code Style
 
-- Responsibility: engineering
-- Area/system: golang
-- Keywords: naming, MixedCaps, initialisms, receiver names, package names, getters, doc comments, godoc, early return, indent error flow, variable names, constants, shadowing, line length, ALL_CAPS, snake_case, comment language, American spelling
-- Aliases: Go naming conventions, Go code style, penamaan Go, camelCase Go, snake_case Go, SCREAMING_SNAKE_CASE Go, Go comments
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [named parameters and results](02-named-parameters-and-results.md), [project layout](04-project-layout.md), [package and API design](06-package-and-api-design.md), [types and data](07-types-and-data.md).
-
 ## Summary
 
 Names and comments carry most of the readability in Go. Use MixedCaps, short names for short scopes, names that read well at the call site, and doc comments that start with the name they describe. Keep the normal path left-aligned by handling errors first.

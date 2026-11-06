@@ -1,14 +1,5 @@
 # TypeScript tsconfig Conventions
 
-- Responsibility: engineering
-- Area/system: typescript
-- Keywords: tsconfig.json, compilerOptions, strict, noUncheckedIndexedAccess, noImplicitOverride, noImplicitReturns, noFallthroughCasesInSwitch, verbatimModuleSyntax, erasableSyntaxOnly, isolatedModules, skipLibCheck, moduleResolution bundler, nodenext, types, paths, baseUrl, rootDir, exactOptionalPropertyTypes, noPropertyAccessFromIndexSignature, @tsconfig/node24, @tsconfig/strictest, ignoreDeprecations
-- Aliases: tsconfig best practice, TypeScript compiler options, strict mode TypeScript, konfigurasi tsconfig, opsi compiler TypeScript, tsconfig Next.js, tsconfig Node.js
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [project setup and tooling](02-project-setup-and-tooling.md), [modules and imports](06-modules-and-imports.md), [modern TypeScript by release](12-modern-typescript-by-release.md), [Next.js setup and tooling](../nextjs-convention/02-project-setup-and-tooling.md#typescript).
-
 ## Summary
 
 Start from the `tsconfig.json` that the framework generates, and add six options that catch real bugs at a low cost. Keep every other option off unless a note names it. New projects turn the six options on at once, and an existing project adopts them one option per change.

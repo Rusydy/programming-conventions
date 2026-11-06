@@ -1,14 +1,5 @@
 # Next.js Error Handling and Loading States
 
-- Responsibility: engineering
-- Area/system: nextjs
-- Keywords: error.tsx, global-error.tsx, not-found.tsx, notFound, loading.tsx, Suspense, error boundary, catchError, retry, reset, unstable_retry, error digest, expected errors, uncaught exceptions, skeleton, blocking route
-- Aliases: Next.js error handling, halaman error Next.js, 404 Next.js, loading skeleton Next.js, error boundary Next.js, penanganan error Next.js
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [layout and routing](03-project-layout-and-routing.md), [data fetching and caching](05-data-fetching-and-caching.md), [mutations and forms](06-mutations-and-forms.md).
-
 ## Summary
 
 Next.js separates expected errors from uncaught exceptions. Expected errors are values that the code returns and renders. Uncaught exceptions are bugs that an error boundary (`error.tsx`) catches. Every route that fetches data also needs a loading state, either an inline `<Suspense>` boundary or a `loading.tsx` file.

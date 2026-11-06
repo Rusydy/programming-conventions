@@ -1,14 +1,5 @@
 # TypeScript Naming, Comments and Code Style
 
-- Responsibility: engineering
-- Area/system: typescript
-- Keywords: naming, UpperCamelCase, lowerCamelCase, CONSTANT_CASE, kebab-case, acronyms, interface prefix, underscore prefix, TSDoc, JSDoc, doc comments, TODO owner, comment language, American spelling, Prettier, const, let, var, equality, early return, template literals
-- Aliases: penamaan TypeScript, TypeScript naming conventions, TypeScript comments, gaya kode TypeScript, camelCase PascalCase, komentar kode, bahasa komentar, TypeScript code style
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [tsconfig](03-tsconfig.md), [modules and imports](06-modules-and-imports.md), [types and type design](04-types-and-type-design.md), [Next.js layout and routing](../nextjs-convention/03-project-layout-and-routing.md#naming).
-
 ## Summary
 
 Names carry the meaning that types cannot, so write descriptive names in the casing of the table below. Document the exported API with doc comments, explain why in other comments, and write comments in English. Prettier decides the layout, and nobody formats by hand.

@@ -1,14 +1,5 @@
 # Next.js Project Layout and Routing
 
-- Responsibility: engineering
-- Area/system: nextjs
-- Keywords: project layout, folder structure, app directory, route groups, private folders, colocation, special files, page.tsx, layout.tsx, loading.tsx, error.tsx, not-found.tsx, route.ts, default.tsx, dynamic routes, params, PageProps, LayoutProps, RouteContext, next/link, redirects, rewrites, proxy.ts, middleware.ts, import alias, file naming, kebab-case, named exports, src folder
-- Aliases: struktur folder Next.js, Next.js routing, Next.js app router layout, folder structure Next.js, penamaan file Next.js, route group Next.js
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [setup and tooling](02-project-setup-and-tooling.md), [Server and Client Components](04-server-and-client-components.md), [error handling and loading](07-error-handling-and-loading.md), [metadata and SEO](08-metadata-and-seo.md), [security](10-security.md).
-
 ## Summary
 
 Next.js is unopinionated about where project files live, but it documents three strategies and asks teams to pick one and stay consistent. This convention keeps `app/` for routing only and puts shared code in `components/` and `lib/`. Route groups give different layouts to different routes, and `next/link` handles internal navigation.

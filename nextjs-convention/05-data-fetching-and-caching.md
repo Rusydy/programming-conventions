@@ -1,14 +1,5 @@
 # Next.js Data Fetching and Caching
 
-- Responsibility: engineering
-- Area/system: nextjs
-- Keywords: data fetching, fetch, Server Components, Data Access Layer, DAL, DTO, Zod, React.cache, Promise.all, waterfall, streaming, Suspense, loading.tsx, Data Cache, next.revalidate, next.tags, force-cache, unstable_cache, revalidateTag, updateTag, revalidatePath, refresh, route segment config, dynamic rendering, Route Handlers, webhook, Cache Components, cacheComponents, use cache, cacheLife, cacheTag, Partial Prerendering, PPR, ensureStatic, ISR
-- Aliases: Next.js caching, Next.js data fetching, fetch di server, revalidasi Next.js, ISR Next.js, previous caching model, Cache Components, use cache directive, caching Next.js 16
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [layout and routing](03-project-layout-and-routing.md), [Server and Client Components](04-server-and-client-components.md), [mutations and forms](06-mutations-and-forms.md), [security](10-security.md), [deployment](12-deployment-and-self-hosting.md), [modern Next.js by release](13-modern-nextjs-by-release.md).
-
 ## Summary
 
 Fetch data in Server Components through one `server-only` module per upstream, and validate the response with Zod. Start independent requests together, and stream the slow ones behind `<Suspense>`. Cache upstream data with `fetch` options and revalidate it with tags. The HTML renders per request, and Cache Components stay off on Next.js 16.x.

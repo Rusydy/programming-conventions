@@ -1,14 +1,5 @@
 # TypeScript Testing
 
-- Responsibility: engineering
-- Area/system: typescript
-- Keywords: testing, Vitest, Jest, test files, it.each, typed fixtures, builders, vi.fn, vi.spyOn, fake timers, rejects.toThrow, type tests, expectTypeOf, assertType, test-d.ts, vitest --typecheck, ts-expect-error, partial mock, no any in tests
-- Aliases: tes TypeScript, unit test TypeScript, Vitest TypeScript, mock TypeScript, uji tipe, type testing, fixture bertipe, table test TypeScript
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [project setup and tooling](02-project-setup-and-tooling.md), [types and type design](04-types-and-type-design.md), [error handling](09-error-handling.md), [Next.js testing and quality gates](../nextjs-convention/11-testing-and-quality-gates.md).
-
 ## Summary
 
 Test TypeScript with Vitest, keep the tests inside the type check, build fixtures with typed helpers, and avoid `any` in tests. Test the types of generic helpers and complex types with `expectTypeOf`. The Next.js notes cover end-to-end tests and the performance gates.

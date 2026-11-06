@@ -1,14 +1,5 @@
 # TypeScript Project Setup and Tooling
 
-- Responsibility: engineering
-- Area/system: typescript
-- Keywords: typescript package, TypeScript 6.0, TypeScript 7.0, @typescript/typescript6, @typescript/native, tsc, tsc6, typecheck, ESLint flat config, typescript-eslint, recommendedTypeChecked, stylisticTypeChecked, projectService, bulk suppressions, eslint-suppressions.json, Prettier, tsx, ts-node, Node.js type stripping, @types/node, CI checklist, npm scripts
-- Aliases: TypeScript setup, TypeScript tooling, TypeScript CI checklist, install TypeScript, lint TypeScript, setup project TypeScript, type stripping, menjalankan TypeScript di Node, upgrade TypeScript
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [tsconfig](03-tsconfig.md), [testing](10-testing.md), [modern TypeScript by release](12-modern-typescript-by-release.md), [Next.js setup and tooling](../nextjs-convention/02-project-setup-and-tooling.md).
-
 ## Summary
 
 Every TypeScript project keeps a small toolchain: one TypeScript 6.0 compiler, a typed ESLint flat config, Prettier, and one script per check, all run in CI. Node.js runs TypeScript scripts directly through type stripping, and `tsx` covers what stripping cannot.

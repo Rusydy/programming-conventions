@@ -1,14 +1,5 @@
 # TypeScript Modules and Imports
 
-- Responsibility: engineering
-- Area/system: typescript
-- Keywords: ES modules, import type, verbatimModuleSyntax, named exports, default exports, barrel file, index.ts, export star, path alias, paths, subpath imports, imports field, package.json, node prefix, .ts extension, side-effect import, circular dependency, dynamic import, JSON import attributes, require
-- Aliases: modul TypeScript, import dan export TypeScript, barrel file, alias path @/, circular import, impor tipe, export default vs named export, subpath imports
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [tsconfig](03-tsconfig.md), [naming, comments and style](07-naming-comments-and-style.md), [Next.js layout and routing](../nextjs-convention/03-project-layout-and-routing.md).
-
 ## Summary
 
 Write ES modules with named exports, mark type-only imports with `type`, and import across folders through the `@/` alias instead of long relative paths. Import from the module that defines a name, not through a barrel file.

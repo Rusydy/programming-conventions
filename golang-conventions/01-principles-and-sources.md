@@ -1,14 +1,5 @@
 # Go Principles and Sources of Truth
 
-- Responsibility: engineering
-- Area/system: golang
-- Keywords: golang, Go, idiomatic Go, convention over configuration, best practice, readability, Effective Go, Go Code Review Comments, Google Go Style Guide, Uber Go Style Guide, source precedence, gofmt, go vet, path-scoped rule, golang.md digest, shared repositories
-- Aliases: Go conventions overview, Go coding standard, Go style principles, how to write Go, prinsip penulisan Go, Go idiomatik
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [named parameters and results](02-named-parameters-and-results.md), [modern Go by release](12-modern-go-by-release.md).
-
 ## Summary
 
 These principles apply to every Go project. They put the conventions of the language and its toolchain ahead of project-specific configuration, so that any Go developer can read the code on the first day. A precedence list settles disagreements between sources.

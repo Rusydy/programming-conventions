@@ -1,14 +1,5 @@
 # TypeScript Error Handling
 
-- Responsibility: engineering
-- Area/system: typescript
-- Keywords: errors, throw, Error, cause, ErrorOptions, custom error class, instanceof, catch unknown, useUnknownInCatchVariables, only-throw-error, Result type, discriminated union, safeParse, empty catch, log once, RFC 9457, problem details, application/problem+json, Route Handler, neverthrow
-- Aliases: penanganan error TypeScript, TypeScript exceptions, try catch TypeScript, custom error TypeScript, Result type TypeScript, error cause, catch unknown, error response Next.js
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [types and type design](04-types-and-type-design.md), [runtime validation](05-runtime-validation-and-external-data.md), [functions, classes and async](08-functions-classes-and-async.md), [Next.js error handling](../nextjs-convention/07-error-handling-and-loading.md), [Go error handling](../golang-conventions/08-error-handling.md).
-
 ## Summary
 
 Throw `Error` objects for faults, and keep the original error as the `cause`. Return a typed result when failure is a normal outcome, such as invalid input. Catch only what the code can handle, narrow the caught value before use, and log once at the boundary.

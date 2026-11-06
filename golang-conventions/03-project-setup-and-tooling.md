@@ -1,14 +1,5 @@
 # Go Project Setup and Tooling
 
-- Responsibility: engineering
-- Area/system: golang
-- Keywords: gofmt, goimports, go vet, staticcheck, golangci-lint, govulncheck, go mod tidy, go.mod, go directive, toolchain, tool directive, go tool, go fix, modernize, race detector, CI checklist, Makefile, gopls, GitLab CI, .gitlab-ci.yml, gofumpt, unparam
-- Aliases: Go tooling, Go CI checklist, linting Go, Go formatter, Go module setup, setup project Go, go.mod best practice
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles and sources](01-principles-and-sources.md), [named parameters and results](02-named-parameters-and-results.md), [project layout](04-project-layout.md), [testing](10-testing.md), [modern Go by release](12-modern-go-by-release.md).
-
 ## Summary
 
 Every Go project uses the same small toolchain: `gofmt`, `goimports`, `go vet`, a lint runner on its standard linter set, `govulncheck` and `go test -race`, all run in CI. The configuration stays minimal because the defaults are the convention.

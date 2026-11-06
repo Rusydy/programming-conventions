@@ -1,14 +1,5 @@
 # TypeScript in React
 
-- Responsibility: engineering
-- Area/system: typescript
-- Keywords: React, TSX, component props, React.FC, FunctionComponent, ComponentProps, children, ReactNode, JSX namespace, React.JSX, hooks types, useState, useRef, useReducer, createContext, event types, ChangeEvent, forwardRef, ref as prop, Server Component props, PageProps, Server Actions types
-- Aliases: TypeScript di React, tipe props React, React.FC, tipe hooks, tipe event React, TSX conventions, typing React components
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [types and type design](04-types-and-type-design.md), [functions, classes and async](08-functions-classes-and-async.md), [runtime validation](05-runtime-validation-and-external-data.md), [Next.js server and client components](../nextjs-convention/04-server-and-client-components.md), [Next.js layout and routing](../nextjs-convention/03-project-layout-and-routing.md#props-and-params).
-
 ## Summary
 
 Write function components with typed props, and let inference type everything else. Do not use `React.FC`. Extend `ComponentProps` to wrap an HTML element, give hooks a type argument only where the initial value cannot carry it, and type events by their element. This note covers the TypeScript side only. The Next.js notes decide components, routing and data.

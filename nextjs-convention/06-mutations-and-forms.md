@@ -1,14 +1,5 @@
 # Next.js Mutations and Forms
 
-- Responsibility: engineering
-- Area/system: nextjs
-- Keywords: Server Functions, Server Actions, use server, forms, FormData, useActionState, useFormStatus, useOptimistic, useTransition, validation, Zod, Valibot, progressive enhancement, updateTag, revalidateTag, revalidatePath, redirect, rate limiting, CSRF, allowedOrigins, IDOR
-- Aliases: Next.js forms, Server Actions Next.js, mutasi data Next.js, form validation Next.js, kirim form Next.js, action server
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [Server and Client Components](04-server-and-client-components.md), [data fetching and caching](05-data-fetching-and-caching.md), [error handling and loading](07-error-handling-and-loading.md), [security](10-security.md).
-
 ## Summary
 
 Mutate data through Server Functions. Each one is a public POST endpoint, so it authenticates, authorises and validates its own input, returns expected errors as values, updates the cache, and then redirects. Forms use `<form action>` so that they work before hydration.

@@ -1,14 +1,5 @@
 # Go Project Layout
 
-- Responsibility: engineering
-- Area/system: golang
-- Keywords: project layout, folder structure, cmd, internal, pkg, main package, run function, package by responsibility, testdata, go:embed, golang-standards project-layout, Organizing a Go module, existing projects layout
-- Aliases: struktur folder Go, Go repo structure, Go directory layout, standard project layout, organising a Go module
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [tooling](03-project-setup-and-tooling.md), [naming and style](05-naming-comments-and-style.md), [package and API design](06-package-and-api-design.md), [service practices](11-service-practices.md).
-
 ## Summary
 
 Follow the Go team's guidance in "Organizing a Go module": start flat, keep private code in `internal/`, put binaries in `cmd/<name>/`, and keep `main` thin. The community `golang-standards/project-layout` repository is not an official standard, so treat it as a source of ideas only.

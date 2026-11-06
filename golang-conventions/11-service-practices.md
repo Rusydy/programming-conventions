@@ -1,14 +1,5 @@
 # Go Service Practices
 
-- Responsibility: engineering
-- Area/system: golang
-- Keywords: slog, structured logging, configuration, environment variables, flag, net/http, ServeMux, http.Client timeout, graceful shutdown, database/sql, transactions, SQL injection, crypto/rand, secrets, TLS, govulncheck, LogValuer, backend service, pgx, golang-migrate, SQL migrations, OpenTelemetry, otelhttp, otelsql, observability, problem details
-- Aliases: Go backend best practice, Go microservice conventions, Go REST service, slog logging, config via env, layanan backend Go
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [project layout](04-project-layout.md), [types and data](07-types-and-data.md), [error handling](08-error-handling.md), [concurrency and context](09-concurrency-and-context.md), [testing](10-testing.md), [tooling](03-project-setup-and-tooling.md).
-
 ## Summary
 
 A Go service stays on the standard library first: `net/http`, `database/sql`, `log/slog`, environment variables and `flag`. Build it in `main`, pass dependencies down explicitly, set a timeout on every network call, log structured events once, and treat all input as untrusted.

@@ -1,14 +1,5 @@
 # TypeScript Principles and Sources of Truth
 
-- Responsibility: engineering
-- Area/system: typescript
-- Keywords: TypeScript, convention over configuration, best practice, strict mode, type safety, readability, TypeScript Handbook, Google TypeScript Style Guide, typescript-eslint, source precedence, version policy, TypeScript 6.0, TypeScript 7.0, erasable syntax, shared repositories, coding agents
-- Aliases: TypeScript conventions overview, TypeScript coding standard, TS style principles, prinsip penulisan TypeScript, konvensi TypeScript, how to write TypeScript, TS conventions
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [project setup and tooling](02-project-setup-and-tooling.md), [tsconfig](03-tsconfig.md), [types and type design](04-types-and-type-design.md), [runtime validation](05-runtime-validation-and-external-data.md), [modern TypeScript by release](12-modern-typescript-by-release.md), [Next.js conventions](../nextjs-convention/01-principles-and-sources.md).
-
 ## Summary
 
 These principles apply to every TypeScript project. They put the compiler and the typescript-eslint presets ahead of local configuration, so that any TypeScript developer can read the code on the first day. A precedence list settles disagreements between sources, and a version policy keeps the compiler, the linter and the framework on releases that work together.

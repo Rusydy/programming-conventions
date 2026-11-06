@@ -1,14 +1,5 @@
 # Modern Next.js by Release
 
-- Responsibility: engineering
-- Area/system: nextjs
-- Keywords: Next.js 13, Next.js 14, Next.js 15, Next.js 16, Next.js 16.1, Next.js 16.2, Next.js 16.3, Next.js 16.4, Next.js 17, release history, migration, deprecated, removed, codemod, proxy.ts, Cache Components, async request APIs, Turbopack, React 19, legacy to modern, upgrade guide
-- Aliases: Next.js per versi, perubahan Next.js, upgrade Next.js 15 ke 16, Next.js changelog, Next.js breaking changes, idiom lama Next.js, what changed in Next.js
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [setup and tooling](02-project-setup-and-tooling.md), [data fetching and caching](05-data-fetching-and-caching.md), [error handling and loading](07-error-handling-and-loading.md).
-
 ## Summary
 
 This note lists what each Next.js release added and which old idiom each addition replaces. Write new code with the modern idiom. Treat the old idiom as something to replace when you touch the line, and run the codemods when you upgrade.

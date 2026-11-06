@@ -1,14 +1,5 @@
 # Next.js Project Setup and Tooling
 
-- Responsibility: engineering
-- Area/system: nextjs
-- Keywords: create-next-app, next.config.ts, package.json scripts, ESLint flat config, eslint.config.mjs, eslint-config-next, core-web-vitals, typescript-eslint, Prettier, TypeScript strict, typedRoutes, next typegen, PageProps, LayoutProps, RouteContext, next-env.d.ts, tsconfig, path alias, Turbopack, Node.js version, .nvmrc, .env, .env.example, next upgrade, codemod, CI checklist, next lint removed
-- Aliases: Next.js setup, Next.js tooling, Next.js CI checklist, lint Next.js, setup project Next.js, tsconfig Next.js, upgrade Next.js, konfigurasi Next.js
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [layout and routing](03-project-layout-and-routing.md), [security](10-security.md), [testing and quality gates](11-testing-and-quality-gates.md), [deployment](12-deployment-and-self-hosting.md), [modern Next.js by release](13-modern-nextjs-by-release.md).
-
 ## Summary
 
 Every Next.js project starts from the `create-next-app` defaults and keeps a small toolchain: strict TypeScript, generated route types, an ESLint flat config, a formatter and `next build`, all run in CI. Configuration stays minimal because the defaults are the convention.

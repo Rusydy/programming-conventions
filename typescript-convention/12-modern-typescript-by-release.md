@@ -1,14 +1,5 @@
 # Modern TypeScript by Release
 
-- Responsibility: engineering
-- Area/system: typescript
-- Keywords: TypeScript 5.0, TypeScript 5.1, TypeScript 5.2, TypeScript 5.3, TypeScript 5.4, TypeScript 5.5, TypeScript 5.6, TypeScript 5.7, TypeScript 5.8, TypeScript 5.9, TypeScript 6.0, TypeScript 7.0, TypeScript 7.1, release history, upgrade, migration, deprecated, removed, ignoreDeprecations, ts5to6, stableTypeOrdering, erasableSyntaxOnly, satisfies, using declarations, import attributes, native compiler, tsgo
-- Aliases: TypeScript per versi, perubahan TypeScript, upgrade TypeScript 5 ke 6, upgrade TypeScript 6 ke 7, TypeScript changelog, TypeScript breaking changes, idiom lama TypeScript, what changed in TypeScript
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [project setup and tooling](02-project-setup-and-tooling.md#typescript-versions), [tsconfig](03-tsconfig.md#changes-in-typescript-60-and-70), [Next.js modern features by release](../nextjs-convention/13-modern-nextjs-by-release.md).
-
 ## Summary
 
 This note lists what each TypeScript release added and which old idiom each addition replaces. Write new code with the modern idiom, replace the old idiom when you touch the line, and upgrade one minor version at a time. TypeScript 6.0 is the version to run today, and TypeScript 7 follows when typescript-eslint supports it.

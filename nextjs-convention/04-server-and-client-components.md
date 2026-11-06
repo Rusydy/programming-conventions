@@ -1,14 +1,5 @@
 # Next.js Server and Client Components
 
-- Responsibility: engineering
-- Area/system: nextjs
-- Keywords: Server Components, Client Components, use client, server-only, client-only, RSC payload, hydration, composition, children slot, context provider, third-party components, next/dynamic, lazy loading, ssr false, useSearchParams, usePathname, Suspense, serialisable props, DTO, async client component
-- Aliases: RSC, React Server Components, server component vs client component, kapan pakai use client, komponen server dan client, boundary use client, ClientLayout
-- Status: active
-- Last updated: 2026-10-26
-
-Related notes: [principles](01-principles-and-sources.md), [layout and routing](03-project-layout-and-routing.md), [data fetching and caching](05-data-fetching-and-caching.md), [security](10-security.md).
-
 ## Summary
 
 Components are Server Components by default. A file becomes a Client Component only when it starts with `'use client'`, and everything that file imports joins the client bundle. Keep the boundary small, push it to the leaves, and pass server data down as serialisable props.
