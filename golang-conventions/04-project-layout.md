@@ -1,0 +1,98 @@
+# Go Project Layout
+
+- Responsibility: engineering
+- Area/system: golang
+- Keywords: project layout, folder structure, cmd, internal, pkg, main package, run function, package by responsibility, testdata, go:embed, golang-standards project-layout, Organizing a Go module, existing projects layout
+- Aliases: struktur folder Go, Go repo structure, Go directory layout, standard project layout, organising a Go module
+- Status: active
+- Last updated: 2026-10-26
+
+Related notes: [principles](01-principles-and-sources.md), [tooling](03-project-setup-and-tooling.md), [naming and style](05-naming-comments-and-style.md), [package and API design](06-package-and-api-design.md), [service practices](11-service-practices.md).
+
+## Summary
+
+Follow the Go team's guidance in "Organizing a Go module": start flat, keep private code in `internal/`, put binaries in `cmd/<name>/`, and keep `main` thin. The community `golang-standards/project-layout` repository is not an official standard, so treat it as a source of ideas only.
+
+## Rules
+
+### Choose the layout by project type
+
+| Project | Layout |
+| --- | --- |
+| Library | Package at the repository root; supporting code in `internal/` |
+| Single command | `main.go` and its files at the root |
+| Several commands | `cmd/<name>/main.go` for each command; shared code in `internal/` |
+| Service | `cmd/<service>/main.go`; all other Go packages in `internal/`; non-Go folders beside them |
+
+A service repository then looks like this:
+
+```text
+repo/
+├── go.mod
+├── cmd/
+│   └── api/
+│       └── main.go        # wiring only
+├── internal/
+│   ├── auth/
+│   ├── loan/
+│   └── report/
+├── migrations/            # non-Go files stay outside internal/
+└── deploy/
+```
+
+### Rules for folders and packages
+
+- **Start flat.** Begin with `go.mod` and a few files in one package. Add a directory when a name is worth a package.
+- **Prefer `internal/`.** The Go team recommends keeping packages in `internal/` as far as possible. Other modules cannot import them, so you can refactor freely.
+- **Skip `pkg/`.** The official guidance never uses it, and `internal/` already separates private code from public code. When a package inside `internal/` becomes useful to other repositories, split it into its own module.
+- **Treat `golang-standards/project-layout` as optional reading.** Its README says it is not an official standard defined by the core Go team, and it points readers to "Organizing a Go module".
+- **Organise by responsibility, not by layer.** Name packages after what they provide (`loan`, `report`, `auth`), not after technical layers (`controller`, `service`, `repository`). Layer packages invite import cycles and names such as `service.LoanService`. Go Code Review Comments lists `util`, `common`, `misc`, `api`, `types` and `interfaces` as meaningless package names. The Google guide adds `utility`, `helper`, `model` and `testhelper`.
+- **Keep the tree shallow.** One or two levels under `internal/` is usually enough. A sub-package marks a separate responsibility, not a category.
+- **Keep non-Go assets outside `internal/`,** in plainly named folders such as `migrations/` and `deploy/`. Embed files that the binary needs at run time (SQL, templates) with `//go:embed`.
+
+### Files
+
+- Use lower-case names. Separate words with underscores only when needed: `loan_store.go`.
+- Avoid accidental build constraints. A file name that ends in a known operating system or architecture, such as `_linux`, `_windows` or `_arm64`, builds only there, and `_test` marks a test file. `report_linux.go` therefore builds only on Linux. Pick another word unless that is the intent.
+- Name a file after the main type or concern it holds (`store.go`, `loan.go`) and keep its tests beside it (`store_test.go`). Do not add an `_impl.go` suffix: Go does not split an interface from its implementation by file.
+- Put fixtures in a `testdata/` folder. The `go` tool ignores folders with that name when it builds packages.
+
+### Keep main thin
+
+- `main` decides nothing. It calls `run` and turns the returned error into an exit code. `os.Exit` and `log.Fatal` appear only in `main`, because deferred calls do not run after them.
+- `run` takes its inputs as parameters (context, arguments, environment lookup and writers), so tests can call it without touching the process.
+
+```go
+func main() {
+	if err := run(context.Background(), os.Args[1:], os.Getenv, os.Stdout, os.Stderr); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+}
+
+func run(ctx context.Context, args []string, getenv func(key string) (value string), stdout, stderr io.Writer) (err error) {
+	// parse flags, load config, build dependencies, serve until ctx is cancelled
+	return nil
+}
+```
+
+[Service practices](11-service-practices.md#application-wiring) covers configuration, logging and graceful shutdown inside `run`.
+
+### Generated code
+
+- Keep generated code in the package that uses it. Start each generated file with the standard line `// Code generated by <tool>. DO NOT EDIT.` so that tools and linters skip it.
+- Put the `//go:generate` directive next to the source that drives it, and regenerate with `go generate ./...`.
+- Commit generated files unless the build always regenerates them.
+
+### Existing projects
+
+- An existing project keeps its layout. Do not move its folders to `cmd/` and `internal/` unless a change needs it.
+- Put new code where the repository already puts that kind of code, and do not start a second structure beside it. Restructure only inside a change that already rewrites that code ([principles](01-principles-and-sources.md#applying-the-notes)).
+- A new service uses the layout above.
+
+## Sources and raw notes
+
+- [Organizing a Go module](https://go.dev/doc/modules/layout): package, command, `internal/`, `cmd/` and server layouts. The page does not mention `pkg/`.
+- [golang-standards/project-layout](https://github.com/golang-standards/project-layout): README disclaimer that it is not an official standard.
+- [Go Code Review Comments](https://go.dev/wiki/CodeReviewComments): Package Names. [Google Go Style Decisions](https://google.github.io/styleguide/go/decisions): package names. [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md): Exit in Main.
+- `go help packages` (`testdata` is ignored) and `go help buildconstraint` (file-name constraints), Go 1.26.3.
