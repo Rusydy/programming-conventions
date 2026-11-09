@@ -29,7 +29,7 @@ When two sources disagree, the lower number wins.
 4. The Google TypeScript Style Guide, where the sources above are silent.
 5. Other style guides. Adopt one of their rules only when a note in this folder names it.
 
-A framework's required shape overrides items 2 to 5 for the code that the framework dictates, such as the default exports of Next.js special files ([Next.js conventions](../nextjs-convention/03-project-layout-and-routing.md#naming)).
+A framework's required shape overrides items 2 to 5 for the code that the framework dictates, such as the default exports of Next.js special files ([Next.js conventions](../nextjs-conventions/03-project-layout-and-routing.md#naming)).
 
 ### Applying the notes
 
@@ -46,7 +46,7 @@ A framework's required shape overrides items 2 to 5 for the code that the framew
 - **TypeScript:** run the newest line that typescript-eslint supports. On 2026-10-26 that is 6.0, declared as `"typescript": "~6.0.3"`. TypeScript 7.0 ships no JavaScript compiler API yet, so typescript-eslint cannot load it ([TypeScript versions](02-project-setup-and-tooling.md#typescript-versions)).
 - **Existing projects on 5.9** may stay there until their next dependency update, and then move to 6.0 in one change.
 - **TypeScript 7:** move `typescript` itself to 7.x when typescript-eslint lists it as supported. Until then, run 7.x side by side only when a full type check takes more than a minute.
-- **Node.js types:** `@types/node` has the same major version as the production Node.js. The Next.js notes decide that major ([versions and runtime](../nextjs-convention/02-project-setup-and-tooling.md#versions-and-runtime)).
+- **Node.js types:** `@types/node` has the same major version as the production Node.js. The Next.js notes decide that major ([versions and runtime](../nextjs-conventions/02-project-setup-and-tooling.md#versions-and-runtime)).
 - **Upgrades:** move one TypeScript minor version at a time, in its own pull request. A minor release can add errors to a clean build, and its release notes list the behaviour changes ([modern TypeScript by release](12-modern-typescript-by-release.md#upgrading)).
 
 ### Working with coding agents

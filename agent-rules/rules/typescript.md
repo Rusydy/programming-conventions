@@ -13,7 +13,7 @@ paths:
 ---
 # TypeScript conventions (every project)
 
-Write type-safe, readable TypeScript. Follow the compiler's, the toolchain's and the language's conventions instead of inventing configuration ("convention over configuration"). This file is a digest of the notes in the `typescript-convention` folder of the programming-conventions repository, which hold the reasons, sources and checked examples. Read the matching note before a large change or when a rule here is unclear. The digest was synced with the notes on 2026-10-26; update it by hand whenever a note changes.
+Write type-safe, readable TypeScript. Follow the compiler's, the toolchain's and the language's conventions instead of inventing configuration ("convention over configuration"). This file is a digest of the notes in the `typescript-conventions` folder of the programming-conventions repository, which hold the reasons, sources and checked examples. Read the matching note before a large change or when a rule here is unclear. The digest was synced with the notes on 2026-10-26; update it by hand whenever a note changes.
 
 ## How to apply
 
@@ -22,7 +22,7 @@ Write type-safe, readable TypeScript. Follow the compiler's, the toolchain's and
 - If the repository documents its own conventions, follow them first. Where it is silent, apply this file to the code you write.
 - Generated files are exempt: `.next/types`, `next-env.d.ts`, the Prisma client and any `.d.ts` file that a tool writes.
 - Write every new source file in TypeScript. A tool configuration file may stay `.js` or `.mjs` where the tool does not read `.ts`.
-- Code inside a Next.js app also follows the Next.js conventions in the `nextjs-convention` folder of the programming-conventions repository.
+- Code inside a Next.js app also follows the Next.js conventions in the `nextjs-conventions` folder of the programming-conventions repository.
 - Prefer the platform: `structuredClone`, `toSorted`, `AbortSignal.timeout` and `fetch` come before a utility library. Add a dependency only when it removes real complexity, and say why in the pull request.
 - Before you report TypeScript changes as done, run `npm run typecheck` and `npm run lint`. Before you use a newer language feature, read the installed version: `node -p "require('typescript').version"`.
 

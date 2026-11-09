@@ -16,7 +16,7 @@ Write ES modules with named exports, mark type-only imports with `type`, and imp
 
 ### Exports
 
-- Use named exports. Use a default export only where a framework requires it: the Next.js special files and the tool config files (`next.config.ts`, `eslint.config.mjs`, `vitest.config.ts`). A module that already has a default export keeps it until a change rewrites the module ([Next.js naming](../nextjs-convention/03-project-layout-and-routing.md#naming)).
+- Use named exports. Use a default export only where a framework requires it: the Next.js special files and the tool config files (`next.config.ts`, `eslint.config.mjs`, `vitest.config.ts`). A module that already has a default export keeps it until a change rewrites the module ([Next.js naming](../nextjs-conventions/03-project-layout-and-routing.md#naming)).
 - Do not write `export let`. A mutable binding is hard to follow through re-exports. Export a function that returns the current value.
 - Do not wrap functions in an object or a class only to give them a namespace (`export const Utils = { ... }`). Export each function and constant on its own.
 - Export only what another module uses.
@@ -46,7 +46,7 @@ import { double } from "#app/util.ts";
 ### Structure
 
 - Do not create circular imports. When two modules need each other, move the shared part into a third module. ESLint does not report cycles in the current config, so check for them in review.
-- Load code on demand with `import()` or `next/dynamic` ([Next.js lazy loading](../nextjs-convention/04-server-and-client-components.md#lazy-loading)). Do not use `require()` for that.
+- Load code on demand with `import()` or `next/dynamic` ([Next.js lazy loading](../nextjs-conventions/04-server-and-client-components.md#lazy-loading)). Do not use `require()` for that.
 
 ## Sources and raw notes
 

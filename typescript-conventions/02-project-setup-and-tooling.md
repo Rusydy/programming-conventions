@@ -37,7 +37,7 @@ flowchart LR
 
 ### Node.js and type packages
 
-- Give `@types/node` the same major version as the production Node.js, in `engines` and in `.nvmrc` as well ([versions and runtime](../nextjs-convention/02-project-setup-and-tooling.md#versions-and-runtime)). `create-next-app` writes `@types/node ^20`: change it to the runtime major.
+- Give `@types/node` the same major version as the production Node.js, in `engines` and in `.nvmrc` as well ([versions and runtime](../nextjs-conventions/02-project-setup-and-tooling.md#versions-and-runtime)). `create-next-app` writes `@types/node ^20`: change it to the runtime major.
 - Keep `@types/react` and `@types/react-dom` on the React major version.
 - Do not install an `@types/*` package for a library that ships its own types.
 
@@ -55,7 +55,7 @@ flowchart LR
 }
 ```
 
-- Next.js projects write `typecheck` as `next typegen && tsc --noEmit` and add `next build` to `ci` ([scripts](../nextjs-convention/02-project-setup-and-tooling.md#scripts)).
+- Next.js projects write `typecheck` as `next typegen && tsc --noEmit` and add `next build` to `ci` ([scripts](../nextjs-conventions/02-project-setup-and-tooling.md#scripts)).
 - Run the checks in this order: type check, lint, format check, tests, build. Have the CI runner call `npm run ci` and nothing else.
 - Include test files in the type check. A type error in a test fails the build.
 
@@ -109,7 +109,7 @@ export default defineConfig({
 });
 ```
 
-- Put `eslint-config-prettier/flat` last in either config, so that ESLint and Prettier do not fight ([linting and formatting](../nextjs-convention/02-project-setup-and-tooling.md#linting-and-formatting)).
+- Put `eslint-config-prettier/flat` last in either config, so that ESLint and Prettier do not fight ([linting and formatting](../nextjs-conventions/02-project-setup-and-tooling.md#linting-and-formatting)).
 - The presets already forbid `any`, floating promises, `@ts-ignore`, `require()` and throwing non-errors. Disable a rule only with a comment that gives the reason.
 - Write `@ts-expect-error` with a description, because `ban-ts-comment` rejects it without one. `@ts-ignore` and `@ts-nocheck` are banned.
 

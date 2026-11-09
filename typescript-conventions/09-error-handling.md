@@ -63,7 +63,7 @@ export function toError(value: unknown): Error {
 ### Expected failures
 
 - Return a result when failure is a normal outcome: a parser that rejects arbitrary text, a form that the user filled in wrong, a lookup that may find nothing. A union that you narrow with `ok` keeps the failure in the type.
-- Use the result of `safeParse` for schemas, and a state object for a form ([forms](../nextjs-convention/06-mutations-and-forms.md#validation-and-errors)). Do not add a result library. `neverthrow` has 2.2 million weekly downloads, and the three-line union below covers these cases.
+- Use the result of `safeParse` for schemas, and a state object for a form ([forms](../nextjs-conventions/06-mutations-and-forms.md#validation-and-errors)). Do not add a result library. `neverthrow` has 2.2 million weekly downloads, and the three-line union below covers these cases.
 
 ```ts
 export type Result<T, E = Error> =
@@ -94,7 +94,7 @@ export function problem(status: number, title: string, detail?: string): Respons
 }
 ```
 
-- The error boundaries of Next.js (`error.tsx`) receive an `unknown` error that you narrow before use ([Next.js error handling](../nextjs-convention/07-error-handling-and-loading.md)).
+- The error boundaries of Next.js (`error.tsx`) receive an `unknown` error that you narrow before use ([Next.js error handling](../nextjs-conventions/07-error-handling-and-loading.md)).
 
 ## Sources and raw notes
 

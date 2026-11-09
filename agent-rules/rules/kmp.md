@@ -12,7 +12,7 @@ paths:
 ---
 # Kotlin Multiplatform conventions (every KMP project)
 
-Write idiomatic Kotlin Multiplatform. Follow the official project shape and the defaults of the Kotlin Gradle plugin instead of inventing configuration ("convention over configuration"). This file is a digest of the notes in the `kmp-convention` folder of the programming-conventions repository, which hold the reasons, sources and decisions. It adds to `kotlin.md` and does not replace it: every Kotlin rule still applies in every source set. Read the matching note before a large change or when a rule here is unclear. The digest was synced with the notes on 2026-11-06; update it by hand whenever a note changes.
+Write idiomatic Kotlin Multiplatform. Follow the official project shape and the defaults of the Kotlin Gradle plugin instead of inventing configuration ("convention over configuration"). This file is a digest of the notes in the `kmp-conventions` folder of the programming-conventions repository, which hold the reasons, sources and decisions. It adds to `kotlin.md` and does not replace it: every Kotlin rule still applies in every source set. Read the matching note before a large change or when a rule here is unclear. The digest was synced with the notes on 2026-11-06; update it by hand whenever a note changes.
 
 ## How to apply
 
@@ -87,7 +87,7 @@ Write idiomatic Kotlin Multiplatform. Follow the official project shape and the 
 
 ## Notes index
 
-Each file is in the `kmp-convention` folder of the programming-conventions repository.
+Each file is in the `kmp-conventions` folder of the programming-conventions repository.
 
 - `01-principles-and-sources.md`: principles, precedence, stability table, where sources disagree, decisions to review
 - `02-project-setup-and-tooling.md`: versions, plugins, the Android-KMP plugin, targets, properties, tools not used

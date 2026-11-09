@@ -10,7 +10,7 @@ Every Next.js project starts from the `create-next-app` defaults and keeps a sma
 
 - **Next.js:** the latest Active LTS ([version policy](01-principles-and-sources.md#version-policy)).
 - **Node.js:** use the major that the official `with-docker` example runs (24 on 2026-10-26). Existing projects on Node.js 22 stay there until it reaches end of life on 2027-04-30. Node.js 20 reached end of life on 2026-04-30, and Next.js 16 needs 20.9 or later. Use the same major in `.nvmrc`, in the `engines` field and in the Docker base image.
-- **TypeScript:** 5.1 or later is the Next.js minimum. Run the line that the [TypeScript version policy](../typescript-convention/01-principles-and-sources.md#version-policy) names (6.0 on 2026-10-26, `~6.0.3`). Do not install `typescript@^7` yet. `next build` can type-check with it through the local `tsc` CLI, but typescript-eslint, and `eslint-config-next` with it, need the JavaScript API that TypeScript 7.0 does not provide ([TypeScript versions](../typescript-convention/02-project-setup-and-tooling.md#typescript-versions)).
+- **TypeScript:** 5.1 or later is the Next.js minimum. Run the line that the [TypeScript version policy](../typescript-conventions/01-principles-and-sources.md#version-policy) names (6.0 on 2026-10-26, `~6.0.3`). Do not install `typescript@^7` yet. `next build` can type-check with it through the local `tsc` CLI, but typescript-eslint, and `eslint-config-next` with it, need the JavaScript API that TypeScript 7.0 does not provide ([TypeScript versions](../typescript-conventions/02-project-setup-and-tooling.md#typescript-versions)).
 - **React:** keep `react`, `react-dom`, `@types/react` and `@types/react-dom` on one major version (19.x). The App Router runs the React build that ships inside Next.js (React 19.3 in Next.js 16.4), but you still declare React in `package.json` for tooling. The Pages Router uses the version from `package.json`.
 - **Package manager:** one per repository, with a committed lock file. CI installs from the lock file (`npm ci`).
 - **Ranges:** declare `next`, `react` and `react-dom` with caret ranges (`^16.4.3`, the latest patch on 2026-10-26). The lock file pins the exact version, and `npm update` then takes patch releases. An exact pin in `package.json` blocks that.
@@ -53,7 +53,7 @@ npx create-next-app@latest my-app --yes
 - Use `next.config.ts` with `import type { NextConfig } from 'next'`.
 - Set `typedRoutes: true`. TypeScript then checks literal `href` strings in `<Link>` and in `router.push`, `replace` and `prefetch`. Cast a non-literal string with `as Route`.
 - Type route props with the global helpers ([props and params](03-project-layout-and-routing.md#props-and-params)).
-- Add the compiler options of the TypeScript conventions to a new project ([tsconfig](../typescript-convention/03-tsconfig.md#baseline-for-a-nextjs-application)).
+- Add the compiler options of the TypeScript conventions to a new project ([tsconfig](../typescript-conventions/03-tsconfig.md#baseline-for-a-nextjs-application)).
 
 ### Linting and formatting
 
@@ -77,7 +77,7 @@ export default defineConfig([
 - `eslint-config-next` bundles the Next.js, React and React Hooks rules, `typescript-eslint` and `eslint-plugin-jsx-a11y` (a dependency of the package). It needs ESLint 9 or later, and ESLint 10 works from `eslint-config-next@16.4.0`.
 - `next lint` and the `eslint` option in the Next.js config were removed in 16.0. A legacy `.eslintrc.*` migrates with `npx @next/codemod@canary next-lint-to-eslint-cli .`.
 - Disable a Next.js rule only with a comment that gives the reason.
-- Add the typed typescript-eslint presets after these two configs, as the TypeScript conventions show ([linting](../typescript-convention/02-project-setup-and-tooling.md#linting)).
+- Add the typed typescript-eslint presets after these two configs, as the TypeScript conventions show ([linting](../typescript-conventions/02-project-setup-and-tooling.md#linting)).
 - ESLint is the linter and Prettier is the formatter. Biome is not used: `create-next-app` generates the ESLint setup, and both tools have several times the weekly downloads of Biome.
 - Format with Prettier and its default options, with no config file. `eslint-config-prettier/flat` goes last in the ESLint config, so that the two tools do not fight.
 

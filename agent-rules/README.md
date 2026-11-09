@@ -14,9 +14,9 @@ These files make Claude Code follow the conventions in this repository in every 
 | `rules/typescript.md` | `~/.claude/rules/typescript.md` | TypeScript, loaded for `*.ts`, `*.tsx`, `*.mts`, `*.cts` and `tsconfig.json` |
 | `CLAUDE-block.md` | Append to `~/.claude/CLAUDE.md` | An index that loads in every session and says which rule to read first |
 
-Next.js has no digest. Its notes apply through the bundled Next.js docs and the project's `AGENTS.md`, as [nextjs-convention](../nextjs-convention/01-principles-and-sources.md) explains. Python's notes are in [python-conventions](../python-conventions/01-principles-and-sources.md).
+Next.js has no digest. Its notes apply through the bundled Next.js docs and the project's `AGENTS.md`, as [nextjs-conventions](../nextjs-conventions/01-principles-and-sources.md) explains. Python's notes are in [python-conventions](../python-conventions/01-principles-and-sources.md).
 
-`kmp.md` is the digest of [kmp-convention](../kmp-convention/01-principles-and-sources.md). It loads next to `kotlin.md` and does not replace it. Its `paths` list names the source-set folders of Kotlin Multiplatform (`src/*Main`, `src/*Test`) and the build files of the module names in the JetBrains project structure (`shared*`, `composeApp`, `androidApp`, `desktopApp`, `webApp`), so a plain Android or Spring module does not load it. `src/androidTest` of a plain Android module also matches `src/*Test`; the digest tells Claude to ignore itself in a module that is not multiplatform.
+`kmp.md` is the digest of [kmp-conventions](../kmp-conventions/01-principles-and-sources.md). It loads next to `kotlin.md` and does not replace it. Its `paths` list names the source-set folders of Kotlin Multiplatform (`src/*Main`, `src/*Test`) and the build files of the module names in the JetBrains project structure (`shared*`, `composeApp`, `androidApp`, `desktopApp`, `webApp`), so a plain Android or Spring module does not load it. `src/androidTest` of a plain Android module also matches `src/*Test`; the digest tells Claude to ignore itself in a module that is not multiplatform.
 
 ## How the rules load
 

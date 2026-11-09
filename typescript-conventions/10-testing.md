@@ -8,7 +8,7 @@ Test TypeScript with Vitest, keep the tests inside the type check, build fixture
 
 ### Tools
 
-- Use Vitest for unit and component tests. It has 83.7 million weekly downloads, against 28.0 million for Jest. Playwright covers end-to-end tests ([Next.js testing](../nextjs-convention/11-testing-and-quality-gates.md#choosing-the-test-tool)).
+- Use Vitest for unit and component tests. It has 83.7 million weekly downloads, against 28.0 million for Jest. Playwright covers end-to-end tests ([Next.js testing](../nextjs-conventions/11-testing-and-quality-gates.md#choosing-the-test-tool)).
 - Put a test next to the code it tests (`loan.test.ts` beside `loan.ts`), and a type test in a `*.test-d.ts` file. Keep end-to-end tests in `e2e/`.
 - Import the test API from `vitest` (`import { describe, expect, it, vi } from "vitest"`). Do not turn on `globals`, so that no `types` entry is needed.
 - Include the test files in `tsconfig.json`, so that `npm run typecheck` and the lint config cover them. A type error in a test fails the build.

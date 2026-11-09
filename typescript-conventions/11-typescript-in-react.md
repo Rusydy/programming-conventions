@@ -38,7 +38,7 @@ export function Button({ variant = "primary", children, ...rest }: ButtonProps) 
 - Type a ref by its element: `useRef<HTMLInputElement>(null)`.
 - Type a reducer through the `State` annotation of its initial state, and write the actions as a discriminated union ([types and type design](04-types-and-type-design.md#model-alternatives-with-unions)).
 - Create a context with `createContext<T | null>(null)`, and read it through a hook that throws when the value is `null`. The hook then returns `T`, so no component handles `null`.
-- Do not add `useMemo`, `useCallback` or `React.memo` for typing reasons, and not without a profiler result ([memoisation](../nextjs-convention/04-server-and-client-components.md#memoisation)).
+- Do not add `useMemo`, `useCallback` or `React.memo` for typing reasons, and not without a profiler result ([memoisation](../nextjs-conventions/04-server-and-client-components.md#memoisation)).
 
 ```tsx
 import { createContext, useContext } from "react";
@@ -82,8 +82,8 @@ export function NameField() {
 
 ### Next.js boundaries
 
-- Type route props with the generated `PageProps`, `LayoutProps` and `RouteContext` helpers. `params` and `searchParams` are promises ([props and params](../nextjs-convention/03-project-layout-and-routing.md#props-and-params)).
-- Give a Client Component only props that can cross the server boundary: plain data, not class instances or functions, except Server Functions ([props across the boundary](../nextjs-convention/04-server-and-client-components.md#props-across-the-boundary)).
+- Type route props with the generated `PageProps`, `LayoutProps` and `RouteContext` helpers. `params` and `searchParams` are promises ([props and params](../nextjs-conventions/03-project-layout-and-routing.md#props-and-params)).
+- Give a Client Component only props that can cross the server boundary: plain data, not class instances or functions, except Server Functions ([props across the boundary](../nextjs-conventions/04-server-and-client-components.md#props-across-the-boundary)).
 - Type a Server Function by the `FormData` it reads and the state it returns. Parse the `FormData` with a schema, and define the state as an `interface` ([forms](05-runtime-validation-and-external-data.md#forms-and-user-input)).
 - Put `'use client'` only on a file that uses state, effects, event handlers or browser APIs. It is not a typing tool.
 

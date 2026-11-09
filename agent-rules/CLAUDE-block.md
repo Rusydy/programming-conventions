@@ -8,6 +8,6 @@ Before you write or change code in one of these languages, check that its conven
 - Kotlin Multiplatform (a module with a `commonMain` source set or the `org.jetbrains.kotlin.multiplatform` plugin, and its Gradle build files): `~/.claude/rules/kmp.md`, together with `kotlin.md`
 - Python (`*.py`, `*.pyi`, `pyproject.toml`): `~/.claude/rules/python.md`
 - TypeScript (`*.ts`, `*.tsx`, `*.mts`, `*.cts`, `tsconfig.json`): `~/.claude/rules/typescript.md`
-- Next.js: follow the bundled docs in `node_modules/next/dist/docs/` when the project has them, and the `nextjs-convention` folder of the programming-conventions repository.
+- Next.js: follow the bundled docs in `node_modules/next/dist/docs/` when the project has them, and the `nextjs-conventions` folder of the programming-conventions repository.
 
 A project's own documented conventions come first. The rules apply where the project is silent. Generated code is exempt.

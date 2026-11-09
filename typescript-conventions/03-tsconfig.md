@@ -73,7 +73,7 @@ The block starts from the file that `create-next-app@16.4.3` writes and adds the
 }
 ```
 
-- Keep the generated `include` and `plugins` entries ([Next.js TypeScript rules](../nextjs-convention/02-project-setup-and-tooling.md#typescript)).
+- Keep the generated `include` and `plugins` entries ([Next.js TypeScript rules](../nextjs-conventions/02-project-setup-and-tooling.md#typescript)).
 - Do not add `types`. The generated `next-env.d.ts` loads the Next.js types, and those reference the Node.js types and declare `*.css`, `*.sass` and `*.scss` modules. A Next.js project therefore needs no `global.d.ts` for side-effect style imports, and TypeScript 6.0 does not change that.
 
 ### Baseline for a Node.js project

@@ -22,7 +22,7 @@ Mutate data through Server Functions. Each one is a public POST endpoint, so it 
 
 ### Validation and errors
 
-- Validate on the server with a Zod schema ([runtime validation](../typescript-convention/05-runtime-validation-and-external-data.md#forms-and-user-input)). HTML attributes (`required`, `type="email"`) only help the user.
+- Validate on the server with a Zod schema ([runtime validation](../typescript-conventions/05-runtime-validation-and-external-data.md#forms-and-user-input)). HTML attributes (`required`, `type="email"`) only help the user.
 - Return expected errors (invalid input, a rejected upstream call) as values and read them with `useActionState`. Throw only for unexpected errors, which reach the nearest `error.tsx` ([error handling](07-error-handling-and-loading.md)).
 - Show messages in an element with `aria-live="polite"`.
 - Show the pending state with the `pending` value of `useActionState`, or with `useFormStatus` in a child button. Use `useOptimistic` for optimistic updates and `useTransition` when an event handler calls an action.

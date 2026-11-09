@@ -20,10 +20,10 @@ These are one developer's choices. The notes flag the places where they go beyon
 | Bash | [`bash-conventions/`](bash-conventions/) | Project setup with ShellCheck and shfmt, layout, naming and style, quoting and expansion, functions and control flow, error handling and strict mode, scripts as commands, portability across Bash versions, security, testing with bats-core, patterns and pitfalls |
 | Go | [`golang-conventions/`](golang-conventions/) | Tooling, project layout, naming and style, package and API design, types, errors, concurrency and context, testing, service practices, modern Go by release |
 | Kotlin | [`kotlin-conventions/`](kotlin-conventions/) | Gradle and static checks, packages, naming, idiomatic use, null safety and types, API design, errors, coroutines and Flow, testing, platform practices (Android, Compose, multiplatform, Spring), modern Kotlin by release |
-| Kotlin Multiplatform | [`kmp-convention/`](kmp-convention/) | The multiplatform layer on top of the Kotlin set: project setup with the Android-KMP library plugin, module structure and source sets, `expect`/`actual` and platform code, dependencies, architecture and navigation, Compose Multiplatform, concurrency and the iOS boundary, testing and CI, modern Kotlin Multiplatform by release |
-| Next.js | [`nextjs-convention/`](nextjs-convention/) | App Router projects: routing, Server and Client Components, data fetching and caching, forms, errors and loading, metadata, styling and assets, security, testing, deployment and self-hosting, version policy |
+| Kotlin Multiplatform | [`kmp-conventions/`](kmp-conventions/) | The multiplatform layer on top of the Kotlin set: project setup with the Android-KMP library plugin, module structure and source sets, `expect`/`actual` and platform code, dependencies, architecture and navigation, Compose Multiplatform, concurrency and the iOS boundary, testing and CI, modern Kotlin Multiplatform by release |
+| Next.js | [`nextjs-conventions/`](nextjs-conventions/) | App Router projects: routing, Server and Client Components, data fetching and caching, forms, errors and loading, metadata, styling and assets, security, testing, deployment and self-hosting, version policy |
 | Python | [`python-conventions/`](python-conventions/) | Tooling with uv, Ruff, mypy and pytest, project layout, naming and style, idiomatic use, types and data modeling, API and class design, errors and logging, concurrency and async, testing, security and dependencies, platform practices (scripts and Django), modern Python by release |
-| TypeScript | [`typescript-convention/`](typescript-convention/) | tsconfig, types and type design, validating external data, modules, naming, functions and async code, errors, testing, TypeScript in React, modern TypeScript by release |
+| TypeScript | [`typescript-conventions/`](typescript-conventions/) | tsconfig, types and type design, validating external data, modules, naming, functions and async code, errors, testing, TypeScript in React, modern TypeScript by release |
 
 ## How each set is organized
 
@@ -55,7 +55,7 @@ Several ideas recur across the principles notes:
 - **Go:** [named parameters and results](golang-conventions/02-named-parameters-and-results.md) is a labelled personal override. It names every parameter and result, and the note says it deviates on purpose from the Go team's guidance on unnamed results.
 - **Bash:** the [principles note](bash-conventions/01-principles-and-sources.md#decisions-to-review) lists the decisions made where the sources disagree, and the place to change each one.
 - **Python:** the [principles note](python-conventions/01-principles-and-sources.md#decisions-to-review) lists twelve decisions made where the sources disagree or leave a choice open, such as an 88-column line length instead of PEP 8's 79.
-- **Kotlin Multiplatform:** the [principles note](kmp-convention/01-principles-and-sources.md#decisions-to-review) lists eleven decisions, such as keeping Gradle while Kotlin Toolchain is Alpha.
+- **Kotlin Multiplatform:** the [principles note](kmp-conventions/01-principles-and-sources.md#decisions-to-review) lists eleven decisions, such as keeping Gradle while Kotlin Toolchain is Alpha.
 Read these as one developer's choices, not as consensus.
 
 ## Versions

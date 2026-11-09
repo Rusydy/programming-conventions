@@ -62,7 +62,7 @@ export function formatAmount(amountMinor: number): string {
 Pages read on 2026-10-26:
 
 - [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html): identifier styles and `CONSTANT_CASE` for module-level constants, acronyms as words, no `I` prefix, no underscore prefix or suffix and no `_` identifier, descriptive names with the ten-line exception, JSDoc against ordinary comments, no types in `@param`, comments that add information.
-- [Next.js layout and routing](../nextjs-convention/03-project-layout-and-routing.md#naming): kebab-case file names.
+- [Next.js layout and routing](../nextjs-conventions/03-project-layout-and-routing.md#naming): kebab-case file names.
 - The `eslint-recommended` part of the typescript-eslint presets (`no-var`, `prefer-const`) and `no-for-in-array` and `no-implied-eval` in `recommended-type-checked` (`typescript-eslint@8.72.0`).
 - The Go notes made the same decision for code comments ([comments](../golang-conventions/05-naming-comments-and-style.md#doc-comments-and-other-comments)).
 - The `formatAmount` example compiled and passed the lint config of [setup](02-project-setup-and-tooling.md#linting) in a scratch project (TypeScript 5.9.3).
