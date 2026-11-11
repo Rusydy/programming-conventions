@@ -8,7 +8,7 @@ Use Tailwind CSS for most styling and CSS Modules for the rest. Use the built-in
 
 ### Styling
 
-- Use Tailwind CSS for most styling, CSS Modules (`name.module.css`) when utilities are not enough, and global CSS only for truly global rules such as the Tailwind base layer.
+- Use Tailwind CSS for most styling, as the Next.js CSS docs recommend it first, and CSS Modules (`name.module.css`) when utilities are not enough. Use global CSS only for truly global rules such as the Tailwind base layer.
 - Import global CSS once, in the root layout. Keep other CSS imports in as few entry files as you can. Import order sets CSS order, and the order in `next build` can differ from `next dev`, so check the production build.
 - Turn off linters that sort imports automatically (such as ESLint `sort-imports`), because they reorder CSS imports.
 - New projects use Tailwind CSS v4: `@tailwindcss/postcss` in `postcss.config.mjs` and `@import 'tailwindcss'` in the global stylesheet. The docs keep a separate v3 guide for older browsers. A project on v3 stays on v3 until a change needs something that only v4 offers. There is no standalone migration.
@@ -50,6 +50,7 @@ Use Tailwind CSS for most styling and CSS Modules for the rest. Use the built-in
 Pages read on 2026-10-26:
 
 - [CSS](https://nextjs.org/docs/app/getting-started/css): Tailwind v4 setup, CSS Modules, global CSS, ordering and recommendations.
+- Pages read on 2026-11-10: [CSS](https://nextjs.org/docs/app/getting-started/css) (updated 2026-08-25). Tailwind CSS is listed first and recommended for most styling, with CSS Modules for what utilities do not cover.
 - [Image optimization](https://nextjs.org/docs/app/getting-started/images) and the [`Image` reference](https://nextjs.org/docs/app/api-reference/components/image): props, `preload`, `remotePatterns`, version history.
 - [Font optimization](https://nextjs.org/docs/app/getting-started/fonts).
 - [Third-party libraries](https://nextjs.org/docs/app/guides/third-party-libraries): `GoogleAnalytics`, automatic page views.

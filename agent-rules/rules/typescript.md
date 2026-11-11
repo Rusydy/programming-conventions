@@ -13,7 +13,7 @@ paths:
 ---
 # TypeScript conventions (every project)
 
-Write type-safe, readable TypeScript. Follow the compiler's, the toolchain's and the language's conventions instead of inventing configuration ("convention over configuration"). This file is a digest of the notes in the `typescript-conventions` folder of the programming-conventions repository, which hold the reasons, sources and checked examples. Read the matching note before a large change or when a rule here is unclear. The digest was synced with the notes on 2026-10-26; update it by hand whenever a note changes.
+Write type-safe, readable TypeScript. Follow the compiler's, the toolchain's and the language's conventions instead of inventing configuration ("convention over configuration"). This file is a digest of the notes in the `typescript-conventions` folder of the programming-conventions repository, which hold the reasons, sources and checked examples. Read the matching note before a large change or when a rule here is unclear. The digest was synced with the notes on 2026-11-10; update it by hand whenever a note changes.
 
 ## How to apply
 
@@ -23,7 +23,7 @@ Write type-safe, readable TypeScript. Follow the compiler's, the toolchain's and
 - Generated files are exempt: `.next/types`, `next-env.d.ts`, the Prisma client and any `.d.ts` file that a tool writes.
 - Write every new source file in TypeScript. A tool configuration file may stay `.js` or `.mjs` where the tool does not read `.ts`.
 - Code inside a Next.js app also follows the Next.js conventions in the `nextjs-conventions` folder of the programming-conventions repository.
-- Prefer the platform: `structuredClone`, `toSorted`, `AbortSignal.timeout` and `fetch` come before a utility library. Add a dependency only when it removes real complexity, and say why in the pull request.
+- Prefer the platform: `structuredClone`, `toSorted`, `AbortSignal.timeout`, `fetch`, the `node:` modules, type stripping and `node:test` come before a package, and the same order applies to tools. Add a dependency only when it removes real complexity, and say why in the pull request. A tool with no built-in equivalent, such as a linter, a formatter or a schema validator, is exempt; the notes list its choice under decisions to review.
 - Before you report TypeScript changes as done, run `npm run typecheck` and `npm run lint`. Before you use a newer language feature, read the installed version: `node -p "require('typescript').version"`.
 
 ## Version and toolchain
@@ -37,7 +37,7 @@ Write type-safe, readable TypeScript. Follow the compiler's, the toolchain's and
 
 ## Scripts and checks
 
-- Scripts: `typecheck` is `tsc --noEmit` (Next.js: `next typegen && tsc --noEmit`), `lint` is `eslint`, `format:check` is `prettier --check .`, `test` is `vitest run`, and `ci` is `npm run typecheck && npm run lint && npm run format:check && npm test`. A Next.js project adds `next build` to `ci`.
+- Scripts: `typecheck` is `tsc --noEmit` (Next.js: `next typegen && tsc --noEmit`), `lint` is `eslint`, `format:check` is `prettier --check .`, `test` is `vitest run` (or `node --test` in a project that uses only `node:test`), and `ci` is `npm run typecheck && npm run lint && npm run format:check && npm test`. A Next.js project adds `next build` to `ci`.
 - Run the checks in this order: type check, lint, format check, tests, build. CI runs `npm run ci` and nothing else.
 - The type check includes the test files.
 
@@ -62,7 +62,7 @@ Write type-safe, readable TypeScript. Follow the compiler's, the toolchain's and
 
 ## Node.js and the editor
 
-- Run a script with `node script.ts`. Type stripping is on by default from Node.js 22.18 and 24.3, and stable from 24.12 and 25.2. Node.js removes the types without checking them, so `tsc --noEmit` is the check.
+- Run a script with `node script.ts`. Type stripping is on by default from Node.js 22.18, and stable from 24.12 and 25.2. Node.js removes the types without checking them, so `tsc --noEmit` is the check.
 - Stripping needs erasable syntax, `.ts` extensions in relative imports and `import type` for types. It ignores `tsconfig.json`, so `paths` do not work, and it does not run `.tsx`.
 - Use `tsx` when a script needs what stripping lacks: path aliases, JSX or `enum`. Do not add `ts-node`. A script that runs under `tsx` uses the bundler settings in `tsconfig.json`.
 - In the editor, select the workspace TypeScript version (VS Code: "TypeScript: Select TypeScript Version", then "Use Workspace Version") so that the editor and CI report the same errors.
@@ -164,10 +164,10 @@ Write type-safe, readable TypeScript. Follow the compiler's, the toolchain's and
 
 ## Testing
 
-- Use Vitest for unit and component tests, and Playwright for end-to-end tests in `e2e/`.
+- Choose one runner per project. Use `node:test` with `node:assert/strict` for Node.js-only code that needs no DOM, no `expectTypeOf` and no module mocking, and run it with `node --test` (`.test.ts` files need Node.js 22.18 or later). Use Vitest for component tests, type tests and module mocking, and say in the pull request why `node:test` does not fit. Use Playwright for end-to-end tests in `e2e/`.
 - Put a test beside the code it tests (`loan.test.ts` next to `loan.ts`), and a type test in a `*.test-d.ts` file.
-- Import the test API from `vitest`. Do not turn on `globals`.
-- Include the test files in `tsconfig.json`, so that a type error in a test fails the build. The test script is `"test": "vitest run"`.
+- Import the test API from the runner: `vitest` for Vitest, and `node:test` with `node:assert/strict` for `node:test`. Do not turn on Vitest's `globals`.
+- Include the test files in `tsconfig.json`, so that a type error in a test fails the build. The test script is `"test": "vitest run"`, or `"test": "node --test"` in a `node:test` project.
 - Name a `describe` block after the unit, and an `it` block as a sentence about its behaviour. Use `it.each` when cases share their logic: give the table an `interface`, and put a `name` in every case.
 - Build fixtures with a typed helper that takes `Partial<T>` overrides, such as `buildLoan(overrides: Partial<Loan> = {})`, not with copies of a literal.
 - Assert an error by its class and data, not by its message: `rejects.toMatchObject({ status: 404 })`.

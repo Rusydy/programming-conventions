@@ -8,13 +8,37 @@ Test TypeScript with Vitest, keep the tests inside the type check, build fixture
 
 ### Tools
 
-- Use Vitest for unit and component tests. It has 83.7 million weekly downloads, against 28.0 million for Jest. Playwright covers end-to-end tests ([Next.js testing](../nextjs-conventions/11-testing-and-quality-gates.md#choosing-the-test-tool)).
+- Choose one runner for each project. Use `node:test` with `node:assert/strict` for Node.js-only code that needs no DOM, no `expectTypeOf` and no module mocking. `node --test` finds `.test.ts` files only while type stripping is on, which is the default from Node.js 22.18. Use Vitest for component tests, which need a DOM, for type tests and for code that needs module mocking, and say in the pull request why `node:test` does not fit. A project that needs Vitest for any of these uses it for all its tests. Playwright covers end-to-end tests ([Next.js testing](../nextjs-conventions/11-testing-and-quality-gates.md#choosing-the-test-tool)).
 - Put a test next to the code it tests (`loan.test.ts` beside `loan.ts`), and a type test in a `*.test-d.ts` file. Keep end-to-end tests in `e2e/`.
-- Import the test API from `vitest` (`import { describe, expect, it, vi } from "vitest"`). Do not turn on `globals`, so that no `types` entry is needed.
+- Import the test API from the runner: `import { describe, expect, it, vi } from "vitest"` for Vitest, or `import { describe, it } from "node:test"` for `node:test`. Do not turn on Vitest's `globals`, so that no `types` entry is needed.
 - Include the test files in `tsconfig.json`, so that `npm run typecheck` and the lint config cover them. A type error in a test fails the build.
-- Run the tests with `"test": "vitest run"` ([scripts](02-project-setup-and-tooling.md#scripts)).
+- Run the tests with `"test": "vitest run"` in a Vitest project, or with `"test": "node --test"` in a project that uses only `node:test` ([scripts](02-project-setup-and-tooling.md#scripts)).
+
+A Node.js-only module, tested with `node:test`:
+
+```ts
+// greet.ts
+export function greet(name: string): string {
+  return `Hello, ${name}`;
+}
+```
+
+```ts
+// greet.test.ts
+import { describe, it } from "node:test";
+import assert from "node:assert/strict";
+import { greet } from "./greet.ts";
+
+describe("greet", () => {
+  it("names the reader", () => {
+    assert.equal(greet("Ada"), "Hello, Ada");
+  });
+});
+```
 
 ### Writing tests
+
+The examples in this section and the next two use Vitest.
 
 - Name a `describe` block after the unit and an `it` block as a sentence about its behaviour.
 - Write a table with `it.each` when the cases share their logic. Give the table an `interface`, so that each case is type-checked, and put a `name` in every case.
@@ -122,7 +146,9 @@ Pages read on 2026-10-26:
 
 - [Vitest: testing types](https://vitest.dev/guide/testing-types) (`expectTypeOf`, `assertType`, `*.test-d.ts`, `--typecheck`, the `@ts-expect-error` tip), [`vi.fn`](https://vitest.dev/api/vi), [`test.each`](https://vitest.dev/api/test) and [`expect`](https://vitest.dev/api/expect) (`rejects`, `toMatchObject`). npm: `vitest` is 5.0.5.
 - [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html): suppressing `any` warnings in tests with a comment, partial mocks with a documented cast, and the limits of `@ts-expect-error`.
-- npm weekly downloads (`api.npmjs.org`, 2026-10-16 to 2026-10-22): `vitest` 83,654,107, `jest` 27,983,327, `@playwright/test` 49,812,826.
+- Pages read on 2026-11-10: the [Node.js test runner](https://nodejs.org/api/test.html) page (v26.13.0 documentation). The runner is Stable, `mock.module` is Early development, and the page describes no DOM and no type-test API.
+- The `node:test` example above ran on 2026-11-10 with `node --test` in a scratch project that uses the [Node.js baseline](03-tsconfig.md#baseline-for-a-nodejs-project). It passed on Node.js 24.22.1 and 26.13.0, one test each, with exit code 0. On Node.js 22.14.0 the same command found no test and still exited with code 0, which is why the minimum version matters. Node.js 22.18, the first 22.x release with type stripping on by default, was not run because it is not installed.
+- The same project type-checked with TypeScript 5.9.3 and `@types/node` 24.19.2 under the baseline, with no errors. A deliberate type error in a `.ts` file was reported (TS2322 and TS2345), so the check covers test files. TypeScript 6.0.3 was not run because it is not installed locally.
 - The examples were run in a scratch project on 2026-10-26, with Vitest 5.0.5, TypeScript 6.0.3 and Node.js 22.14.0. The three code blocks, extracted from this note, import `@/lib/loan`, which holds the two snippets of [types](04-types-and-type-design.md#model-alternatives-with-unions). They type-checked under the Next.js baseline of [tsconfig](03-tsconfig.md#baseline-for-a-nextjs-application) (with the `@/*` alias pointing at `src`), `vitest run` passed 5 tests, `vitest run --typecheck` passed 7 tests with no type errors, and the typed lint config of [setup](02-project-setup-and-tooling.md#linting) reported nothing.
 - Two type-test claims were checked in the same project. A wrong `toEqualTypeOf` failed as a test (`TypeCheckError`) and the file did not run. A typo behind `// @ts-expect-error` passed under `--typecheck` alone, and failed with a `ReferenceError` when the `*.test-d.ts` file was in `test.include`.
 - Test files and `test` scripts counted in both repositories on 2026-10-26.

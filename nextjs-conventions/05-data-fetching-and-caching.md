@@ -31,7 +31,7 @@ export async function getFaqs() {
 ```
 
 - Do not call your own Route Handler from a Server Component, because it adds a request. Call the data function directly.
-- Fetch in the browser only for interactions after the first render: search as you type, polling, a user-triggered reload. Use SWR, React Query, or `use()` with a promise that a Server Component started. Do not load the first-render content of the site this way. It stays out of the HTML and adds a request waterfall.
+- Fetch in the browser only for interactions after the first render: search as you type, polling, a user-triggered reload. For a promise that a Server Component started, pass it to the Client Component and read it with `use()`, as the Next.js docs list first. Use SWR or React Query only for a need that `use()` does not meet: refetching, polling or a client cache. State that need in the pull request, because these libraries bring their own caching semantics. Do not load the first-render content of the site this way. It stays out of the HTML and adds a request waterfall.
 - Type every upstream response. Do not use `any`.
 
 ### Waterfalls and streaming
@@ -103,3 +103,4 @@ Pages read on 2026-10-26:
 - Security posts of [2026-09-30](https://nextjs.org/blog/september-2026-security-release) and [2026-10-14](https://nextjs.org/blog/nextjs-security-update-october-14-2026): the `use cache` advisories.
 - [Route Handlers](https://nextjs.org/docs/app/getting-started/route-handlers) and [Data security](https://nextjs.org/docs/app/guides/data-security) (Data Access Layer).
 - Verified in a scratch build: with the nonce CSP in the root layout, every page is `ƒ` (dynamic).
+- Pages read on 2026-11-10: [Fetching data](https://nextjs.org/docs/app/getting-started/fetching-data) (updated 2026-09-01). It lists the `use()` option first for client components and says SWR and React Query have their own caching semantics.

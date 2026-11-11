@@ -39,7 +39,7 @@ Keep secrets and data access on the server, behind one data layer that authorise
 
 ### Untrusted HTML
 
-- Do not pass CMS or user HTML to `dangerouslySetInnerHTML` as it is. Sanitise it on the server with DOMPurify (`isomorphic-dompurify`) and an allow-list of tags and attributes. Do not use `sanitize-html`: DOMPurify has more than five times its weekly downloads.
+- Do not pass CMS or user HTML to `dangerouslySetInnerHTML` as it is. Sanitise it on the server with DOMPurify (`isomorphic-dompurify`) and an allow-list of tags and attributes. The browser's HTML Sanitizer API is a method on DOM elements with limited browser availability, so it cannot run on the server.
 - Removing `style` attributes or `<span>` tags is formatting, not sanitising. It leaves `<script>`, event-handler attributes and `javascript:` URLs in place.
 - Treat links from user or CMS data the same way: allow `https:`, `mailto:` and `tel:` and nothing else.
 
@@ -81,4 +81,4 @@ Pages read on 2026-10-26:
 - [Proxy](https://nextjs.org/docs/app/getting-started/proxy) and the [production checklist](https://nextjs.org/docs/app/guides/production-checklist).
 - Security posts: [July 2026](https://nextjs.org/blog/july-2026-security-release), [August 2026](https://nextjs.org/blog/august-2026-security-release), [2026-09-22](https://nextjs.org/blog/nextjs-security-update-september-22-2026), [September 2026](https://nextjs.org/blog/september-2026-security-release), [2026-10-14](https://nextjs.org/blog/nextjs-security-update-october-14-2026).
 - [Image `remotePatterns`](https://nextjs.org/docs/app/api-reference/components/image): wildcard behaviour and the warning about omitted fields.
-- npm weekly downloads on 2026-10-26 (`api.npmjs.org`): `dompurify` 45.3 million, `isomorphic-dompurify` 3.6 million, `sanitize-html` 8.0 million.
+- Pages read on 2026-11-10: the [HTML Sanitizer API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Sanitizer_API) on MDN. The API has limited availability and is not Baseline, and its methods, such as `Element.setHTML()`, are defined on elements and shadow roots.

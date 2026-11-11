@@ -15,7 +15,7 @@ Every pull request passes the same gates: type check, lint, format check, `next 
 ### Choosing the test tool
 
 - The Next.js docs describe four tools: Jest and Vitest for unit and component tests, Playwright and Cypress for end-to-end tests. They recommend end-to-end tests over unit tests for `async` Server Components.
-- Use Vitest for pure functions (formatters, validators, data-layer mappers) and for client components, and Playwright for routes and user journeys. Jest and Cypress are not used: Vitest has about three times the weekly downloads of Jest, and Playwright about fourteen times those of Cypress.
+- Use Vitest for pure functions (formatters, validators, data-layer mappers) and for client components, and Playwright for routes and user journeys, because Playwright drives a real browser and the Node.js test runner does not. Client components need a DOM, which the Node.js test runner lacks, so a Next.js project runs Vitest for all its unit tests to keep one runner ([one runner per project](../typescript-conventions/10-testing.md#tools)). Jest and Cypress are not used, so each job has one tool.
 - Add `"test": "vitest run"` and `"e2e": "playwright test"` to `package.json`, and append `&& npm test && npm run e2e` to the `ci` script.
 - Test your own logic and your journeys. Do not test what Next.js already guarantees.
 - Keep unit tests beside the code (`*.test.ts`) and end-to-end tests in `e2e/`.
@@ -53,6 +53,6 @@ Pages read on 2026-10-26:
 - [Production checklist](https://nextjs.org/docs/app/guides/production-checklist): production-like checks, Lighthouse, web vitals, bundle analysis, accessibility linting.
 - [Environment variables](https://nextjs.org/docs/app/guides/environment-variables): test environment and load order.
 - [Next.js 16.1](https://nextjs.org/blog/next-16-1) (bundle analyzer) and [16.4](https://nextjs.org/blog/next-16-4) (analyzer additions).
-- npm weekly downloads on 2026-10-26 (`api.npmjs.org`): `vitest` 83.7 million, `jest` 28.0 million, `@playwright/test` 49.8 million, `cypress` 3.5 million.
+- Pages read on 2026-11-10: the Node.js [test runner](https://nodejs.org/api/test.html) (v26.13.0 documentation). The runner is Stable, `mock.module` is Early development, and the page describes no DOM or browser environment.
 - [Upgrading to version 16](https://nextjs.org/docs/app/guides/upgrading/version-16): removal of `size` and `First Load JS` from the build output.
 - `eslint-config-next@16.4.1` `package.json` on unpkg: dependencies.

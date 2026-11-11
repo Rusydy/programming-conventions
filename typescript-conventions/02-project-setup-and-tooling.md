@@ -58,6 +58,7 @@ flowchart LR
 - Next.js projects write `typecheck` as `next typegen && tsc --noEmit` and add `next build` to `ci` ([scripts](../nextjs-conventions/02-project-setup-and-tooling.md#scripts)).
 - Run the checks in this order: type check, lint, format check, tests, build. Have the CI runner call `npm run ci` and nothing else.
 - Include test files in the type check. A type error in a test fails the build.
+- A project whose tests all run under `node:test` writes `"test": "node --test"` instead of `vitest run`, as the [testing note](10-testing.md#tools) says. `ci` stays the same.
 
 ### Linting
 
@@ -126,9 +127,9 @@ export default defineConfig({
 
 ### Running TypeScript on Node.js
 
-- Run a script or a small tool directly with `node script.ts`. Type stripping is on by default from Node.js 22.18 and 24.3, and it is stable from 24.12 and 25.2. Node.js removes the types and runs the rest, so it checks nothing: `tsc --noEmit` is the check.
+- Run a script or a small tool directly with `node script.ts`. Type stripping is on by default from Node.js 22.18, and it is stable from 24.12 and 25.2. Node.js removes the types and runs the rest, so it checks nothing: `tsc --noEmit` is the check.
 - Stripping needs erasable syntax, `.ts` extensions in relative imports and `import type` for types. It ignores `tsconfig.json`, so `paths` do not work, and it does not run `.tsx` files ([tsconfig](03-tsconfig.md#baseline-for-a-nodejs-project)).
-- Use `tsx` when a script needs what stripping lacks (path aliases, JSX, `enum`). Do not add `ts-node`: `tsx` has more than twice its weekly downloads, and the Node.js documentation names `tsx` as its example for full TypeScript support.
+- Use `tsx` when a script needs what stripping lacks (path aliases, JSX, `enum`). Do not add `ts-node`: the Node.js documentation names `tsx` as its example of a third-party package for full TypeScript support.
 - Use the bundler settings in `tsconfig.json` for a script that runs under `tsx`, as the TypeScript handbook says.
 
 ```ts
@@ -154,6 +155,6 @@ Pages read on 2026-10-26:
 - [ESLint bulk suppressions](https://eslint.org/docs/latest/use/suppressions): `--suppress-all`, `--prune-suppressions`, and the rule that only `error` rules are suppressed.
 - [Node.js TypeScript documentation](https://nodejs.org/api/typescript.html) (v26.12.1): the version history of type stripping, the unsupported syntax, `tsx` as the example for full support.
 - [TypeScript handbook: choosing compiler options](https://www.typescriptlang.org/docs/handbook/modules/guides/choosing-compiler-options.html): the `tsx` section.
-- npm weekly downloads (`api.npmjs.org`, 2026-10-16 to 2026-10-22): `tsx` 64.5 million, `ts-node` 27.8 million.
+- Pages read on 2026-11-10: the [Node.js TypeScript documentation](https://nodejs.org/api/typescript.html) (v26.13.0). Its history table has type stripping enabled by default from 22.18 and stable from 24.12 and 25.2, it does not read `tsconfig.json` or `paths`, and it names `tsx` as the example of a third-party package for full TypeScript support.
 - Checked with ESLint 9.39.5, typescript-eslint 8.72.0 and TypeScript 5.9.3 in a scratch project: the sample config ran and reported `no-floating-promises`, `no-explicit-any`, `consistent-type-definitions` and `no-non-null-assertion` on a sample, and `greet.ts` ran under `node --experimental-strip-types` on Node.js 22.14.0. The sample config ran without `eslint-config-prettier`.
 - Checked on 2026-10-26 in a scratch project, with TypeScript 6.0.3, ESLint 9.39.5, typescript-eslint 8.72.0 and eslint-config-next 16.4.3: `--fix --suppress-all` followed by a plain run ended with no errors. The alias recipe installed `typescript@7.0.2` as `@typescript/native` and `@typescript/typescript6@6.0.2` as `typescript`, which depends on `typescript@^6` (6.0.3 that day). `npx tsc` printed 7.0.2, `npx tsc6` printed 6.0.3, `require("typescript").version` returned 6.0.3, and `node_modules/.bin/tsserver` came from the 6.0 compiler.

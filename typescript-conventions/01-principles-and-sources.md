@@ -13,7 +13,7 @@ These principles apply to every TypeScript project. They put the compiler and th
 3. **Validate at the edge.** Types disappear at run time. Data from a network, a file, a form, the environment or storage is `unknown` until a schema parses it ([runtime validation](05-runtime-validation-and-external-data.md)).
 4. **Model with unions.** Use discriminated unions and exhaustive `switch` statements instead of flags and optional fields that only make sense together.
 5. **Write erasable syntax only.** Do not use `enum`, `namespace` with code, parameter properties or `import =`. The code then runs under Node.js type stripping and means the same in every tool ([tsconfig](03-tsconfig.md#compiler-options)).
-6. **Prefer the platform.** Use the ECMAScript and Web APIs (`structuredClone`, `Array.prototype.toSorted`, `AbortSignal.timeout`, `fetch`) before a utility library. Add a dependency only when it removes real complexity, and state the reason in the pull request.
+6. **Prefer the platform.** Use the ECMAScript, Web and Node.js built-ins before a package: `structuredClone`, `Array.prototype.toSorted`, `AbortSignal.timeout`, `fetch`, the `node:` modules, type stripping and `node:test`. The same order applies to tools. Add a dependency only when it removes real complexity, and state the reason in the pull request. A tool with no built-in equivalent, such as a linter, a formatter or a schema validator, is exempt, and its choice is listed under [decisions to review](#decisions-to-review).
 7. **Keep one source of truth per type.** Derive types from schemas and constants (`z.infer`, `as const`, `typeof`) instead of writing them twice.
 8. **Throw errors, and return values for expected failures.** Throw only `Error` objects, and return a discriminated union when failure is a normal outcome ([error handling](09-error-handling.md)).
 9. **Wait for a second use case.** Do not add generics, conditional types, abstractions or options "just in case".
@@ -41,6 +41,17 @@ A framework's required shape overrides items 2 to 5 for the code that the framew
 - **Shared and team repositories:** these notes apply to every TypeScript repository you write in, not only your own. When a repository documents its own conventions, follow those first, and apply these notes to the code you write where the repository is silent.
 - **JavaScript:** write every new source file in TypeScript. A tool configuration file may stay `.js` or `.mjs` where the tool does not read `.ts`.
 
+### Decisions to review
+
+These choices were made while writing the notes because the platform does not cover a need, or because a built-in exists and a tool was kept anyway. Each can be reversed in the place named.
+
+| Decision | Why not the built-in | Where to change it |
+| --- | --- | --- |
+| Vitest for component, type and module-mocking tests, and `node:test` for other Node.js-only code, with one runner per project | `node:test` has no DOM environment and no type-test API, and the Node.js docs mark `mock.module` Early development. A project that needs Vitest for any of these uses it for all its tests. | [testing](10-testing.md#tools) |
+| Zod for runtime schemas | Node.js replaces types with whitespace and checks nothing at run time, and the platform has no schema validator, so data from outside the program needs a library to check it. | [runtime validation](05-runtime-validation-and-external-data.md) |
+| ESLint with typescript-eslint and Prettier | `tsc` reports type errors, not style or unsafe patterns such as floating promises, and the platform has no formatter. Both are exempt tools. | [linting](02-project-setup-and-tooling.md#linting) |
+| `tsx` for scripts that need path aliases, JSX or `enum` | Node.js type stripping does not read `tsconfig.json`, so `paths` fail, and it does not run `.tsx` files. `tsx` covers what stripping lacks. | [running TypeScript on Node.js](02-project-setup-and-tooling.md#running-typescript-on-nodejs) |
+
 ### Version policy
 
 - **TypeScript:** run the newest line that typescript-eslint supports. On 2026-10-26 that is 6.0, declared as `"typescript": "~6.0.3"`. TypeScript 7.0 ships no JavaScript compiler API yet, so typescript-eslint cannot load it ([TypeScript versions](02-project-setup-and-tooling.md#typescript-versions)).
@@ -67,3 +78,4 @@ Pages read on 2026-10-26 unless a bullet says otherwise:
 - [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html).
 - Release notes of TypeScript 5.2 to 5.9 (`TypeScript-Website` repository): each minor release has a section on breaking or notable behaviour changes.
 - Loading of path-scoped user-level rules: the Claude Code memory documentation, as the [Go notes](../golang-conventions/01-principles-and-sources.md#applying-the-notes) record it (read on 2026-10-26).
+- Pages read on 2026-11-10 (Node.js v26.13.0 documentation): the [test runner](https://nodejs.org/api/test.html) page (the runner is Stable, `mock.module` is Early development, and `.test.ts` files match only while type stripping is on) and the [TypeScript](https://nodejs.org/api/typescript.html) page (type stripping history, erasable syntax only, no `tsconfig.json` or `paths`).

@@ -45,7 +45,7 @@ The TypeScript team plans a new feature release every three to four months.
 | `esModuleInterop: false`, `alwaysStrict: false` | The only behaviour | deprecated in 6.0, removed in 7.0 |
 | `target: es5`, `downlevelIteration`, `outFile` | A modern `target` and a bundler | deprecated in 6.0, removed in 7.0 |
 | `lib: ["dom", "dom.iterable"]` | `lib: ["dom"]` | 6.0 |
-| `ts-node` | Node.js type stripping, or `tsx` ([setup](02-project-setup-and-tooling.md#running-typescript-on-nodejs)) | Node.js 22.18 and 24.3 |
+| `ts-node` | Node.js type stripping, or `tsx` ([setup](02-project-setup-and-tooling.md#running-typescript-on-nodejs)) | Node.js 22.18 |
 | `sort`, `splice` and `reverse` on shared arrays | `toSorted`, `toSpliced` and `with` | ES2023 library |
 
 ### Upgrading

@@ -14,7 +14,7 @@ These principles apply to every Next.js project. They put the conventions of the
 4. **Fetch on the server, where the data is used.** Do not load your own site's content from the browser on first render ([data fetching and caching](05-data-fetching-and-caching.md)).
 5. **Cache on purpose.** Nothing is cached by accident. Opt in per request with `fetch` options, and tag the data that you will revalidate ([caching](05-data-fetching-and-caching.md#caching-and-revalidation)).
 6. **Treat every Server Function as a public endpoint.** Authenticate, authorise and validate inside each one ([mutations and forms](06-mutations-and-forms.md), [security](10-security.md)).
-7. **Use the built-in components.** `next/link`, `next/image`, `next/font`, `next/script` and the Metadata API replace raw `<a>`, `<img>`, font links, `<script>` and `<head>` ([styling, images, fonts and scripts](09-styling-images-fonts-and-scripts.md)).
+7. **Use the built-in components and the platform first.** `next/link`, `next/image`, `next/font`, `next/script` and the Metadata API replace raw `<a>`, `<img>`, font links, `<script>` and `<head>` ([styling, images, fonts and scripts](09-styling-images-fonts-and-scripts.md)). The same order applies to dependencies: a library comes after the framework, React and the web platform, and a new dependency needs a reason in the pull request that it removes real complexity. A tool with no built-in equivalent, such as a linter, a formatter or a schema validator, is exempt, and its choice is listed under [decisions to review](#decisions-to-review).
 8. **Keep configuration small.** Each non-default option in `next.config.ts` carries a comment that says why.
 9. **Stay on a supported release.** Apply patch releases promptly, because security fixes ship every month ([version policy](#version-policy)).
 10. **Let tools check the work.** Strict TypeScript, generated route types, ESLint and `next build` run in CI ([testing and quality gates](11-testing-and-quality-gates.md)).
@@ -36,6 +36,19 @@ When two sources disagree, the lower number wins.
 - **Mechanical changes** (codemods, formatter runs, dependency bumps) go in their own commits.
 - **Generated files** are exempt and are never edited by hand: `next-env.d.ts`, `.next/` and the route types that `next typegen` writes.
 - **Repositories owned by others:** follow the conventions that repository documents first.
+
+### Decisions to review
+
+These choices were made while writing the notes because the framework's documentation or the platform leaves a choice open, or because a tool stays where a built-in exists. Each can be reversed in the place named.
+
+| Decision | Why not the built-in | Where to change it |
+| --- | --- | --- |
+| Tailwind CSS before CSS Modules | The [Next.js CSS page](https://nextjs.org/docs/app/getting-started/css) lists Tailwind CSS first and recommends it for most styling. CSS Modules and global CSS remain the built-in fallback for what utilities do not cover, and [`create-next-app --yes`](02-project-setup-and-tooling.md#creating-a-project) installs Tailwind. | [styling](09-styling-images-fonts-and-scripts.md#styling) |
+| SWR and React Query after `use()` | The [Next.js data-fetching page](https://nextjs.org/docs/app/getting-started/fetching-data) lists `use()` first for a promise that a Server Component started. SWR and React Query bring their own caching semantics, so they fit a client-side need for refetching, polling or a client cache. | [data fetching](05-data-fetching-and-caching.md#where-to-fetch) |
+| DOMPurify (`isomorphic-dompurify`) | The browser's [HTML Sanitizer API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Sanitizer_API) is a method on DOM elements with limited browser availability, so it cannot run on the server. | [untrusted HTML](10-security.md#untrusted-html) |
+| Vitest and Playwright | `node:test` has no DOM environment, so it cannot run client-component tests, and the Node.js docs give it no type-test API and mark `mock.module` Early development. The Node.js test runner does not drive a browser for end-to-end journeys. | [testing](11-testing-and-quality-gates.md#choosing-the-test-tool) |
+| Zod | Node.js replaces types with whitespace and checks nothing, and the platform has no schema validator, so data from outside the program needs a library to check it. | [runtime validation](../typescript-conventions/05-runtime-validation-and-external-data.md) |
+| ESLint and Prettier | `tsc` reports type errors, not style or unsafe patterns, and the platform has no formatter. Both are exempt tools, as principle 7 says. | [linting and formatting](02-project-setup-and-tooling.md#linting-and-formatting) |
 
 ### Version policy
 
@@ -62,3 +75,4 @@ Pages read on 2026-10-26:
 - [Security update of 2026-10-14](https://nextjs.org/blog/nextjs-security-update-october-14-2026): v16.4.1 (Active LTS) and v15.5.28 (Maintenance LTS).
 - GitHub releases [v16.4.2](https://github.com/vercel/next.js/releases/tag/v16.4.2) (2026-10-15) and [v16.4.3](https://github.com/vercel/next.js/releases/tag/v16.4.3) (2026-10-23): bug-fix backports with no advisories. The npm `latest` tag of `next` was 16.4.3 on 2026-10-26.
 - [Installation](https://nextjs.org/docs/app/getting-started/installation) and [How Next.js supports AI coding agents](https://nextjs.org/docs/app/guides/ai-agents).
+- Pages read on 2026-11-10 for the decisions to review: [Fetching data](https://nextjs.org/docs/app/getting-started/fetching-data) (updated 2026-09-01), [CSS](https://nextjs.org/docs/app/getting-started/css) (updated 2026-08-25), the [HTML Sanitizer API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Sanitizer_API) on MDN, and the Node.js [test runner](https://nodejs.org/api/test.html) and [TypeScript](https://nodejs.org/api/typescript.html) pages (Node.js v26.13.0 documentation).

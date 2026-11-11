@@ -56,6 +56,8 @@ Several ideas recur across the principles notes:
 - **Bash:** the [principles note](bash-conventions/01-principles-and-sources.md#decisions-to-review) lists the decisions made where the sources disagree, and the place to change each one.
 - **Python:** the [principles note](python-conventions/01-principles-and-sources.md#decisions-to-review) lists twelve decisions made where the sources disagree or leave a choice open, such as an 88-column line length instead of PEP 8's 79.
 - **Kotlin Multiplatform:** the [principles note](kmp-conventions/01-principles-and-sources.md#decisions-to-review) lists eleven decisions, such as keeping Gradle while Kotlin Toolchain is Alpha.
+- **Next.js:** the [principles note](nextjs-conventions/01-principles-and-sources.md#decisions-to-review) lists six decisions, such as Tailwind CSS before CSS Modules, each with the reason the built-in does not do the job.
+- **TypeScript:** the [principles note](typescript-conventions/01-principles-and-sources.md#decisions-to-review) lists four decisions, such as Vitest beside `node:test` and `tsx` beside type stripping.
 Read these as one developer's choices, not as consensus.
 
 ## Versions
