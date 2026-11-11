@@ -8,6 +8,7 @@ These files make Claude Code follow the conventions in this repository in every 
 | --- | --- | --- |
 | `rules/bash.md` | `~/.claude/rules/bash.md` | Bash, loaded when a shell file is read or edited |
 | `rules/golang.md` | `~/.claude/rules/golang.md` | Go, loaded for `*.go` and `go.mod` |
+| `rules/infra.md` | `~/.claude/rules/infra.md` | Infrastructure, loaded for Dockerfiles, Compose files, nginx configuration, CI files, systemd units, SSH, fail2ban and Docker daemon configuration, `.env.example` and runbooks |
 | `rules/kmp.md` | `~/.claude/rules/kmp.md` | Kotlin Multiplatform, loaded for Kotlin files in `src/*Main` and `src/*Test` and for the build files of the standard module names; adds to `kotlin.md` |
 | `rules/kotlin.md` | `~/.claude/rules/kotlin.md` | Kotlin, loaded for `*.kt`, `*.kts` and `libs.versions.toml` |
 | `rules/python.md` | `~/.claude/rules/python.md` | Python, loaded for `*.py`, `*.pyi` and `pyproject.toml` |
@@ -15,6 +16,8 @@ These files make Claude Code follow the conventions in this repository in every 
 | `CLAUDE-block.md` | Append to `~/.claude/CLAUDE.md` | An index that loads in every session and says which rule to read first |
 
 Next.js has no digest. Its notes apply through the bundled Next.js docs and the project's `AGENTS.md`, as [nextjs-conventions](../nextjs-conventions/01-principles-and-sources.md) explains. Python's notes are in [python-conventions](../python-conventions/01-principles-and-sources.md).
+
+`infra.md` is the digest of [infra-conventions](../infra-conventions/01-principles-and-sources.md). Its `paths` list names the files that define how a service runs: Dockerfiles and `.dockerignore`, Compose files, `nginx.conf` and the `.conf` files under an `nginx` folder, `.gitlab-ci.yml` and GitHub workflow files, `.service` and `.timer` units, `sshd_config.d` drop-ins, fail2ban `.local` files, `daemon.json`, `.env.example` and `runbook.md`. It does not match a deploy or backup script (Bash scripts load `bash.md`) or an `authorized_keys` line, so ask Claude to read `infra.md` first when you change those. `*.service` and `*.timer` are broad names, so the digest also loads for a file with one of those names that is not a systemd unit; it then has nothing to apply.
 
 `kmp.md` is the digest of [kmp-conventions](../kmp-conventions/01-principles-and-sources.md). It loads next to `kotlin.md` and does not replace it. Its `paths` list names the source-set folders of Kotlin Multiplatform (`src/*Main`, `src/*Test`) and the build files of the module names in the JetBrains project structure (`shared*`, `composeApp`, `androidApp`, `desktopApp`, `webApp`), so a plain Android or Spring module does not load it. `src/androidTest` of a plain Android module also matches `src/*Test`; the digest tells Claude to ignore itself in a module that is not multiplatform.
 

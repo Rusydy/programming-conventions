@@ -39,7 +39,7 @@ When two sources disagree, the lower number wins.
 - **Generated files** are exempt, for example the output of `docker compose config`.
 - **Repositories owned by others:** follow the conventions that repository documents first.
 - **Language sets:** scripts follow the [Bash set](../bash-conventions/01-principles-and-sources.md); the application behind a service follows its own language set. The Next.js Docker section is in [nextjs-conventions](../nextjs-conventions/12-deployment-and-self-hosting.md).
-- **Agent rule:** this set has no digest in `agent-rules/` yet. Until it has one, ask the agent to read the note for the file type (Dockerfile, Compose, nginx, pipeline) before it changes it.
+- **Agent rule:** a condensed digest of these notes is in [agent-rules/rules/infra.md](../agent-rules/rules/infra.md). Install it as a user-level Claude Code rule, as [agent-rules](../agent-rules/README.md) describes. Its `paths` field lists globs for Dockerfiles, Compose files, nginx configuration, CI files, systemd units, SSH, fail2ban and Docker daemon configuration, `.env.example` and runbooks, so Claude Code loads it when it uses Read, Write or Edit on a matching file. A file the globs do not match, such as a deploy or backup script or an `authorized_keys` line, does not load it, so ask Claude to read the rule first; scripts also load the Bash rule. The digest is a manual copy: update it in the same change whenever a note here changes, and bump the sync date in its first paragraph. How path-scoped rules load, their size limit and the working-directory caveat are described in the [Kotlin note](../kotlin-conventions/01-principles-and-sources.md).
 
 ### Version baseline
 

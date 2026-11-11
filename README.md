@@ -1,6 +1,6 @@
 # Programming Conventions
 
-Sourced, opinionated conventions for writing **Bash, Go, Kotlin, Kotlin Multiplatform, Next.js, Python and TypeScript** code.
+Sourced, opinionated conventions for writing **Bash, Go, Kotlin, Kotlin Multiplatform, Next.js, Python and TypeScript** code, and for the **infrastructure** that runs it: Linux servers, Docker, nginx and CI/CD.
 
 Each set starts from what the language, its compiler and its official tools already do. It adds configuration only where a default does not fit, and it records the reason. Where the official guides disagree, the notes say which source wins and why.
 
@@ -8,7 +8,7 @@ These are one developer's choices. The notes flag the places where they go beyon
 
 ## Getting started
 
-1. Choose the set for your language, for example [`kotlin-conventions/`](kotlin-conventions/).
+1. Choose the set for your language, for example [`kotlin-conventions/`](kotlin-conventions/), or for your servers and deployments, [`infra-conventions/`](infra-conventions/).
 2. Read its `01-principles-and-sources.md`.
 3. Open the topic note for your task, for example [`09-coroutines-and-flow.md`](kotlin-conventions/09-coroutines-and-flow.md).
 4. If you use Claude Code, install the rules in [`agent-rules/`](agent-rules/README.md) so that every session follows these conventions.
@@ -19,6 +19,7 @@ These are one developer's choices. The notes flag the places where they go beyon
 | --- | --- | --- |
 | Bash | [`bash-conventions/`](bash-conventions/) | Project setup with ShellCheck and shfmt, layout, naming and style, quoting and expansion, functions and control flow, error handling and strict mode, scripts as commands, portability across Bash versions, security, testing with bats-core, patterns and pitfalls |
 | Go | [`golang-conventions/`](golang-conventions/) | Tooling, project layout, naming and style, package and API design, types, errors, concurrency and context, testing, service practices, modern Go by release |
+| Infrastructure | [`infra-conventions/`](infra-conventions/) | Single-server operations with Docker, Compose, nginx and GitLab CI: repository layout and tooling, the Linux server baseline, Dockerfiles, Compose and the container runtime, nginx, abuse control (rate limits, fail2ban, WAF), secrets, databases, CI/CD and deployment, logging and alerting, backups and recovery, incident response and runbooks, checklists |
 | Kotlin | [`kotlin-conventions/`](kotlin-conventions/) | Gradle and static checks, packages, naming, idiomatic use, null safety and types, API design, errors, coroutines and Flow, testing, platform practices (Android, Compose, multiplatform, Spring), modern Kotlin by release |
 | Kotlin Multiplatform | [`kmp-conventions/`](kmp-conventions/) | The multiplatform layer on top of the Kotlin set: project setup with the Android-KMP library plugin, module structure and source sets, `expect`/`actual` and platform code, dependencies, architecture and navigation, Compose Multiplatform, concurrency and the iOS boundary, testing and CI, modern Kotlin Multiplatform by release |
 | Next.js | [`nextjs-conventions/`](nextjs-conventions/) | App Router projects: routing, Server and Client Components, data fetching and caching, forms, errors and loading, metadata, styling and assets, security, testing, deployment and self-hosting, version policy |
@@ -45,7 +46,7 @@ Several ideas recur across the principles notes:
 ## Applying the notes
 
 - **New code** follows every note in its set.
-- **Existing code:** apply the notes to the lines you write or change. Leave the rest alone unless someone asks for a clean-up, so each review stays small.
+- **Existing code:** apply the notes to the lines you write or change. Leave the rest alone unless someone asks for a clean-up, so each review stays small. The infrastructure set makes one exception: an exposure, such as a database port open to the internet or a committed secret, is fixed when found.
 - **Mechanical changes**, such as formatter runs, dependency bumps and migrations, go in their own commits.
 - **Generated code** is exempt, because the next generation overwrites hand edits.
 - **Repositories owned by others:** follow that repository's conventions first.
@@ -55,6 +56,7 @@ Several ideas recur across the principles notes:
 - **Go:** [named parameters and results](golang-conventions/02-named-parameters-and-results.md) is a labelled personal override. It names every parameter and result, and the note says it deviates on purpose from the Go team's guidance on unnamed results.
 - **Bash:** the [principles note](bash-conventions/01-principles-and-sources.md#decisions-to-review) lists the decisions made where the sources disagree, and the place to change each one.
 - **Python:** the [principles note](python-conventions/01-principles-and-sources.md#decisions-to-review) lists twelve decisions made where the sources disagree or leave a choice open, such as an 88-column line length instead of PEP 8's 79.
+- **Infrastructure:** the [principles note](infra-conventions/01-principles-and-sources.md#decisions-to-review) lists sixteen decisions, such as nginx on the host before nginx in Compose, Debian slim before Alpine, and the starting rate limits and alert thresholds, each with the place to change it.
 - **Kotlin Multiplatform:** the [principles note](kmp-conventions/01-principles-and-sources.md#decisions-to-review) lists eleven decisions, such as keeping Gradle while Kotlin Toolchain is Alpha.
 - **Next.js:** the [principles note](nextjs-conventions/01-principles-and-sources.md#decisions-to-review) lists six decisions, such as Tailwind CSS before CSS Modules, each with the reason the built-in does not do the job.
 - **TypeScript:** the [principles note](typescript-conventions/01-principles-and-sources.md#decisions-to-review) lists four decisions, such as Vitest beside `node:test` and `tsx` beside type stripping.
@@ -62,7 +64,7 @@ Read these as one developer's choices, not as consensus.
 
 ## Versions
 
-Version numbers in these notes are a snapshot from October 2026 (November 2026 for Kotlin Multiplatform). Each set says which versions it targets. Check the current release notes before you start a project, because version facts go stale quickly.
+Version numbers in these notes are a snapshot from October 2026 (November 2026 for Kotlin Multiplatform and the infrastructure set). Each set says which versions it targets. Check the current release notes before you start a project, because version facts go stale quickly.
 
 ## Sources
 
@@ -70,6 +72,7 @@ Each note ends with its sources and the date they were read. The main upstream g
 
 - **Bash:** the [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html), [BashGuide](https://mywiki.wooledge.org/BashGuide/Practices) and [BashPitfalls](https://mywiki.wooledge.org/BashPitfalls) from Greg's Wiki, the [Bash Reference Manual](https://www.gnu.org/software/bash/manual/), and the [Command Line Interface Guidelines](https://clig.dev/).
 - **Go:** [Effective Go](https://go.dev/doc/effective_go), [Go Code Review Comments](https://go.dev/wiki/CodeReviewComments), the [Google Go Style Guide](https://google.github.io/styleguide/go/) and the [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md).
+- **Infrastructure:** the [Docker documentation](https://docs.docker.com/), the [nginx documentation](https://nginx.org/en/docs/), the [OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org/), the [Mozilla SSL configuration guidelines](https://ssl-config.mozilla.org/), the [GitLab CI/CD documentation](https://docs.gitlab.com/ci/) and [The Twelve-Factor App](https://12factor.net/).
 - **Kotlin:** the [Kotlin coding conventions](https://kotlinlang.org/docs/coding-conventions.html), the [Android Kotlin style guide](https://developer.android.com/kotlin/style-guide) and the [library authors' guidelines](https://kotlinlang.org/docs/api-guidelines-introduction.html).
 - **Kotlin Multiplatform:** the [Kotlin Multiplatform documentation](https://kotlinlang.org/docs/multiplatform/get-started.html), the [Compose Multiplatform compatibility page](https://kotlinlang.org/docs/multiplatform/compose-compatibility-and-versioning.html) and the [Android-KMP library plugin](https://developer.android.com/kotlin/multiplatform/plugin).
 - **Next.js:** the [Next.js documentation](https://nextjs.org/docs) and the [support policy](https://nextjs.org/support-policy).
