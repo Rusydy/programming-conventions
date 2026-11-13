@@ -35,14 +35,14 @@ A path-scoped rule cannot load for a new project or a new file, because no match
 
 ## Install
 
-The quickest way is the installer script. It works in Bash 3.2 and later, so it runs on the stock macOS shell. Run it from any folder:
+The quickest way is the installer script, `agent-rules/install`. It is a Python 3.14 script that [uv](https://docs.astral.sh/uv/) runs, so uv must be on your PATH. Run it from any folder:
 
 ```bash
-agent-rules/install.sh --dry-run   # show what would change, write nothing
-agent-rules/install.sh             # copy the rules and add the index block
+agent-rules/install --dry-run   # show what would change, write nothing
+agent-rules/install             # copy the rules and add the index block
 ```
 
-The script copies the rules to `~/.claude/rules/` and appends `CLAUDE-block.md` to `~/.claude/CLAUDE.md`. It never overwrites a rule file that differs from the repository copy. It prints a warning for that file instead. Pass `--force` to replace such files. Rerunning it is safe. Set `CLAUDE_CONFIG_DIR` to install to another folder. Run `install.sh --help` for all options.
+The script copies the rules to `~/.claude/rules/` and appends `CLAUDE-block.md` to `~/.claude/CLAUDE.md`. It never overwrites a rule file that differs from the repository copy. It prints a warning for that file instead. Pass `--force` to replace such files. Rerunning it is safe. Set `CLAUDE_CONFIG_DIR` to install to another folder. Run `agent-rules/install --help` for all options.
 
 To install by hand, run these from the root of this repository. First check that none of the rule names exists yet:
 

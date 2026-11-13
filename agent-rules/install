@@ -1,0 +1,148 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.14"
+# dependencies = []
+# ///
+"""Install the programming-convention rules for Claude Code.
+
+Copy agent-rules/rules/*.md to $CLAUDE_CONFIG_DIR/rules/ (default ~/.claude)
+and append agent-rules/CLAUDE-block.md to $CLAUDE_CONFIG_DIR/CLAUDE.md.
+Existing rule files are never overwritten unless --force is given, and the
+index block is appended only once, so running the script again is safe.
+
+Run it as ./install (uv must be on PATH) or with `uv run --script install`.
+"""
+
+import argparse
+import logging
+import os
+import shutil
+import sys
+from collections.abc import Sequence
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+RULES_SRC = HERE / "rules"
+BLOCK_SRC = HERE / "CLAUDE-block.md"
+BLOCK_HEADING = "## Programming conventions"
+
+logger = logging.getLogger(__name__)
+
+
+def build_parser() -> argparse.ArgumentParser:
+    """Return the command-line parser."""
+    parser = argparse.ArgumentParser(
+        prog="install",
+        description="Install the programming-convention rules for Claude Code.",
+        epilog=(
+            "Set CLAUDE_CONFIG_DIR to install into another folder "
+            "(default: ~/.claude)."
+        ),
+    )
+    parser.add_argument(
+        "-n",
+        "--dry-run",
+        action="store_true",
+        help="show what would change; write nothing",
+    )
+    parser.add_argument(
+        "-f",
+        "--force",
+        action="store_true",
+        help="overwrite rule files that differ from the repository copy",
+    )
+    return parser
+
+
+def config_dir() -> Path:
+    """Return the Claude Code configuration folder."""
+    value = os.environ.get("CLAUDE_CONFIG_DIR")
+    return Path(value) if value else Path.home() / ".claude"
+
+
+def check_sources() -> None:
+    """Raise FileNotFoundError unless the rules and the index block exist."""
+    if not RULES_SRC.is_dir():
+        raise FileNotFoundError(f"missing folder: {RULES_SRC}")
+    if not any(RULES_SRC.glob("*.md")):
+        raise FileNotFoundError(f"no rule files in {RULES_SRC}")
+    if not BLOCK_SRC.is_file():
+        raise FileNotFoundError(f"missing file: {BLOCK_SRC}")
+
+
+def copy_file(src: Path, dest: Path, verb: str, *, dry_run: bool) -> None:
+    """Copy src to dest and report verb, or only report it in a dry run."""
+    if dry_run:
+        print(f"would write {dest}")
+        return
+    shutil.copyfile(src, dest)
+    print(f"{verb}  {dest}")
+
+
+def install_rules(*, dry_run: bool, force: bool) -> None:
+    """Copy each new rule file, and replace differing ones only with force."""
+    dest_dir = config_dir() / "rules"
+    if not dry_run:
+        dest_dir.mkdir(parents=True, exist_ok=True)
+
+    for src in sorted(RULES_SRC.glob("*.md")):
+        dest = dest_dir / src.name
+        if not dest.exists():
+            copy_file(src, dest, "installed", dry_run=dry_run)
+        elif dest.read_bytes() == src.read_bytes():
+            print(f"unchanged  {dest}")
+        elif force:
+            copy_file(src, dest, "overwrote", dry_run=dry_run)
+        else:
+            logger.warning(
+                "skipped %s: it differs from the repository copy "
+                "(use --force to replace it)",
+                dest,
+            )
+
+
+def install_block(*, dry_run: bool) -> None:
+    """Append the index block to CLAUDE.md unless its heading is present."""
+    claude_md = config_dir() / "CLAUDE.md"
+    text = claude_md.read_text(encoding="utf-8") if claude_md.exists() else ""
+    if BLOCK_HEADING in text.splitlines():
+        print(f"unchanged  {claude_md} (block already present)")
+        return
+    if dry_run:
+        print(f"would append block to {claude_md}")
+        return
+
+    claude_md.parent.mkdir(parents=True, exist_ok=True)
+    separator = "\n" if text else ""
+    block = BLOCK_SRC.read_text(encoding="utf-8")
+    with claude_md.open("a", encoding="utf-8") as handle:
+        handle.write(separator + block)
+    print(f"appended   block to {claude_md}")
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    """Install the rules and return the exit status."""
+    args = build_parser().parse_args(argv)
+    logging.basicConfig(
+        level=logging.WARNING,
+        format="install: %(levelname)s: %(message)s",
+        stream=sys.stderr,
+    )
+
+    try:
+        check_sources()
+        if args.dry_run:
+            print("dry run: nothing will be written")
+        install_rules(dry_run=args.dry_run, force=args.force)
+        install_block(dry_run=args.dry_run)
+    except OSError as err:
+        logger.error("%s", err)
+        return 1
+
+    print()
+    print("Done. Start a new Claude Code session to load the rules.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
