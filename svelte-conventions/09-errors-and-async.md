@@ -36,7 +36,7 @@ Handle errors where they happen, as the TypeScript notes say, and use `<svelte:b
 - Model a request with a union, not with three booleans: `{ state: "loading" } | { state: "failed"; error: Error } | { state: "ready"; data: Loan[] }`. Handle it in an `{#if}` chain or in a `{#each}` over the union's `data`. A discriminated union rules out the state in which `loading` and `failed` are both `true` ([types and type design](../typescript-conventions/04-types-and-type-design.md#model-alternatives-with-unions)).
 - Do not pass an `async` function to an event attribute. Call it from a normal handler with `void`: `onclick={() => void save()}`. This is the [TypeScript rule](../typescript-conventions/08-functions-classes-and-async.md#async-code) that `no-misused-promises` enforces.
 - Show a message that a user can act on. Do not show `error.message` of an unexpected error, as the TypeScript notes say, and log the error once where you catch it.
-- Validate data that enters from outside with a schema before it reaches state: a response, a value from storage and the result of a Go binding in a desktop app ([runtime validation](../typescript-conventions/05-runtime-validation-and-external-data.md)).
+- Validate data that enters from outside with a schema before it reaches state: a response and a value from storage ([runtime validation](../typescript-conventions/05-runtime-validation-and-external-data.md)).
 
 ### Error boundaries
 

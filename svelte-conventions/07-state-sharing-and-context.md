@@ -68,7 +68,7 @@ export const [getLoanList, setLoanList] = createContext<LoanList>();
 <LoanPanel />
 ```
 
-- Context is not shared between server requests, so it is the safe choice when state must stay per user. A module-level instance on a server leaks one user's data to the next request. That matters for SvelteKit and does not for a client-only app such as a Wails frontend ([principles](01-principles-and-sources.md#applying-the-notes)).
+- Context is not shared between server requests, so it is the safe choice when state must stay per user. A module-level instance on a server leaks one user's data to the next request. That matters for SvelteKit and does not for a client-only app that has no server rendering ([principles](01-principles-and-sources.md#applying-the-notes)).
 - A component test that needs a context renders a small wrapper component that calls `set` and then renders the component under test ([testing](10-testing.md#component-tests)).
 
 ### Module-level instance

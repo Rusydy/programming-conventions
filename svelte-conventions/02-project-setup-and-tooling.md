@@ -8,7 +8,7 @@ Start a Svelte project from `create-vite` with the `svelte-ts` template, then br
 
 ### Creating a project
 
-- Create a plain Svelte app with `npm create vite@latest <name> -- --template svelte-ts`. A Wails frontend starts from the same template, or from the Wails template, and is then brought to this baseline.
+- Create a plain Svelte app with `npm create vite@latest <name> -- --template svelte-ts`. A frontend that another host embeds starts from the same template, or from that host's template, and is then brought to this baseline. The notes of the host say what else it needs.
 - `npx sv create` writes a SvelteKit project, not a plain Svelte one. Its four templates are `minimal`, `demo`, `library` and `addon`. Use it only for SvelteKit, which has its own [notes](../sveltekit-conventions/02-project-setup-and-tooling.md).
 - The `svelte-ts` template writes `svelte`, `vite`, `@sveltejs/vite-plugin-svelte`, `svelte-check`, `@tsconfig/svelte` and `typescript ~6.0.3`. Keep them. Give `@types/node` the major version of the Node.js that runs the tools ([setup of the TypeScript notes](../typescript-conventions/02-project-setup-and-tooling.md#nodejs-and-type-packages)).
 - Add `lang="ts"` to the `<script>` tag of `App.svelte`, because the template writes it without one.

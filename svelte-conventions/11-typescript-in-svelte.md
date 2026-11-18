@@ -100,7 +100,8 @@ Write every `<script>` with `lang="ts"` and follow the TypeScript notes inside i
 
 ### Validation and external data
 
-- Treat data from outside as `unknown` until a schema accepts it: fetch results, `FormData`, `localStorage`, `postMessage` data, and the replies of the Go bindings in a desktop app. Follow the [runtime validation note](../typescript-conventions/05-runtime-validation-and-external-data.md). Derive the type of the validated data with `z.infer` and use it as the prop type.
+- Treat data from outside as `unknown` until a schema accepts it: fetch results, `FormData`, `localStorage` and `postMessage` data. Follow the [runtime validation note](../typescript-conventions/05-runtime-validation-and-external-data.md), and derive the type of the validated data with `z.infer` and use it as the prop type.
+- A type that a code generator writes from a contract that something else enforces, such as a generated API client, is typed by that generator. Do not write a second schema for it in a component. The notes of the project that owns the generator say where the data is validated.
 
 ### Declarations
 

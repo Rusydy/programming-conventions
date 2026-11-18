@@ -2,7 +2,7 @@
 
 ## Summary
 
-These principles apply to every Svelte 5 project that is not a SvelteKit application, such as a Vite single-page app or the frontend of a Wails desktop app. They put the Svelte compiler, `svelte-check` and the official Svelte documentation ahead of local configuration, so that any Svelte developer can read the code on the first day. The set adds to [typescript-conventions](../typescript-conventions/01-principles-and-sources.md) and never replaces it. SvelteKit has its own folder, [sveltekit-conventions](../sveltekit-conventions/01-principles-and-sources.md), which builds on this one.
+These principles apply to every Svelte 5 project that is not a SvelteKit application, such as a Vite single-page app, or a frontend that another host embeds. They put the Svelte compiler, `svelte-check` and the official Svelte documentation ahead of local configuration, so that any Svelte developer can read the code on the first day. The set adds to [typescript-conventions](../typescript-conventions/01-principles-and-sources.md) and never replaces it. SvelteKit has its own folder, [sveltekit-conventions](../sveltekit-conventions/01-principles-and-sources.md), which builds on this one.
 
 ## Rules
 
@@ -42,9 +42,9 @@ Svelte's required shape overrides the TypeScript notes for the code that Svelte 
 - **Svelte 4 syntax:** a component written with `export let` or `$:` is converted when you change its logic, not when you only touch its styles. Convert one component per change ([modern Svelte by release](12-modern-svelte-by-release.md#migrating-an-existing-project)).
 - **Stricter settings:** adopt a compiler option or a lint rule in its own change, with its errors fixed or suppressed in that change.
 - **Mechanical changes** (formatting, autofixes, dependency bumps, `sv migrate` runs) go in their own commits.
-- **Generated code** is exempt: the folder that Wails writes for its Go bindings, and any file that a tool writes.
+- **Generated code** is exempt: any file that a tool writes, such as a generated API client.
 - **Shared and team repositories:** when a repository documents its own conventions, follow those first, and apply these notes to the code you write where the repository is silent.
-- **Wails and other desktop shells:** the frontend is a client-only Vite project, so there is no server rendering. Every rule here applies, and the notes about server-side state sharing do not.
+- **Client-only hosts:** when a desktop shell or another host embeds the frontend, it is a client-only Vite project, so there is no server rendering. Every rule here applies, and the notes about server-side state sharing do not.
 
 ### Decisions to review
 

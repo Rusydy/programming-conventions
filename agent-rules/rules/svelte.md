@@ -18,8 +18,8 @@ Write idiomatic Svelte 5 in runes mode. Follow the compiler, `svelte-check` and 
 - New and edited code follows this file. Leave untouched code alone unless asked to clean it up, and keep diffs small. Put mechanical changes (formatting, autofixes, dependency bumps, `sv migrate` runs) in their own commits.
 - When sources disagree, the order is: the Svelte compiler and official documentation; this file and the notes; `svelte-check`, `eslint-plugin-svelte` and the typescript-eslint presets; the TypeScript notes for every question about TypeScript itself.
 - Svelte's required shape overrides the TypeScript notes in three places: a `.svelte` file is a default export, a component's props type is a local `Props` interface, and shared reactive state is a class.
-- If the repository documents its own conventions, follow them first. Generated files are exempt, such as the folder that Wails writes for Go bindings.
-- SvelteKit has its own notes and digest (`sveltekit.md`), which load next to this file. This file covers a plain Vite app, such as a Wails frontend, which has no server rendering.
+- If the repository documents its own conventions, follow them first. Generated files are exempt, such as a generated API client.
+- SvelteKit has its own notes and digest (`sveltekit.md`), which load next to this file. This file covers a plain Vite app, including one that another host embeds, which has no server rendering.
 - Before you report Svelte changes as done, run `npm run check`, `npm run lint` and `npm test`. Before you use a newer feature, read the version: `node -p "require('svelte/package.json').version"`.
 
 ## Setup and tooling
@@ -94,14 +94,14 @@ Write idiomatic Svelte 5 in runes mode. Follow the compiler, `svelte-check` and 
 
 - Vitest only, `globals` off, two projects in `vite.config.ts` with `extends: true`: `unit` (node, `src/**/*.test.ts`, excluding `*.browser.test.ts`) and `component` (`src/**/*.browser.test.ts`, browser mode with `playwright()` and `instances: [{ browser: "chromium" }]`). Install `vitest vitest-browser-svelte @vitest/browser-playwright playwright`, then `npx playwright install chromium`. Browser mode is Vitest's recommended way for components; jsdom with Testing Library only where a browser cannot run, with a recorded reason.
 - Name a test after its file. Use `name.svelte.test.ts` when the test itself uses a rune. Extract logic from components and test it without a component first. Create fresh instances per test, call `flushSync()` before asserting on derived values or effects, and wrap effect tests in `$effect.root`.
-- Component tests: `render` from `vitest-browser-svelte`, query by role and name (`getByRole`), act through locators, assert on what a user sees and on callback props. Use a wrapper component for context, bindings and snippet props. Mock only boundaries (network, clock, Go bindings), never a child component. Playwright covers end-to-end tests against `vite preview`.
+- Component tests: `render` from `vitest-browser-svelte`, query by role and name (`getByRole`), act through locators, assert on what a user sees and on callback props. Use a wrapper component for context, bindings and snippet props. Mock only boundaries (network, clock, a host's or backend's client), never a child component. Playwright covers end-to-end tests against `vite preview`.
 - All TypeScript test rules apply: typed fixtures with `Partial<T>`, no `any`, assert errors by class and data, restore fake timers.
 
 ## TypeScript in Svelte
 
 - Every `<script>` and `<script module>` has `lang="ts"`. Svelte only strips types, so use no `enum`, parameter properties or other non-erasable syntax. `import type` for types. The TypeScript notes apply in full: `unknown` for external data, no `any`, no `as` to silence the compiler, no `!`, discriminated unions.
 - Type `$state` by argument when it starts empty. Type `bind:this` by element (`$state<HTMLInputElement>()`) or by component name (`$state<DocTitle>()`). `Component<Props>` for a component-valued prop, `ComponentProps<typeof Button>` for props of an existing component. Never `SvelteComponent` or `ComponentType`.
-- Treat the replies of Go bindings, fetch results, `FormData` and storage as `unknown` until a schema parses them; use `z.infer` for the prop type.
+- Treat fetch results, `FormData` and storage as `unknown` until a schema parses them; use `z.infer` for the prop type. A type that a code generator writes from a contract enforced elsewhere (a generated API client) is not given a second schema in the page.
 - Augment `svelte/elements` in a `.d.ts` with `export {}` for custom attributes. Keep `svelte` and `vite/client` in `types`. Add no `declare module "*.svelte"`.
 
 ## Modern Svelte

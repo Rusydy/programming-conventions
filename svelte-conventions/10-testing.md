@@ -19,7 +19,7 @@ npm install -D vitest vitest-browser-svelte @vitest/browser-playwright playwrigh
 npx playwright install chromium
 ```
 
-- Write end-to-end tests with Playwright against `vite preview`, as the Svelte testing page describes. A Wails app needs its own end-to-end approach, which these notes do not cover.
+- Write end-to-end tests with Playwright against `vite preview`, as the Svelte testing page describes. An app that another host embeds may need its own end-to-end approach, which these notes do not cover.
 
 ```ts
 // vite.config.ts
@@ -124,7 +124,7 @@ it("calls onSelect with the loan id when the row is clicked", async () => {
 - Query by role and accessible name first. A test that finds an element by class or by test id gives you no check that a user or a screen reader can find it.
 - Do not test what Svelte already guarantees, such as that `$derived` recomputes or that `bind:value` updates a variable. Test your own behaviour.
 - To test a component that uses context, a two-way binding or a snippet prop, write a small wrapper component for the test. It calls `set` of the context pair or passes the snippet, and renders the component under test.
-- Mock only a boundary: the network, the clock and the Go bindings of a desktop app. Give a double the type of what it replaces, as the TypeScript notes say. Do not mock a child component.
+- Mock only a boundary: the network, the clock and the client of a host or a backend that the page cannot run. Give a double the type of what it replaces, as the TypeScript notes say. Do not mock a child component.
 - Keep component tests few and about behaviour. A test per prop combination slows the suite and breaks on every refactor.
 
 ## Sources and raw notes

@@ -14,7 +14,7 @@ Group code by feature. A feature folder holds its components, its `.svelte.ts` s
 - Keep a component small enough to read in one screen. Split a component when a part has its own state, its own props or a name of its own, not because the file is long.
 - Move logic that has no markup out of the component: a function into a `.ts` file, reactive state into a `.svelte.ts` module ([state sharing](07-state-sharing-and-context.md)). A `.ts` file runs in a plain test with no component.
 - Do not write an `index.ts` that re-exports a folder, as the [TypeScript notes](../typescript-conventions/06-modules-and-imports.md#exports) say. Import from the file that defines the name.
-- A Wails frontend keeps the folder that Wails generates for the Go bindings as it is, and imports from it. Treat it as generated code, and do not edit it.
+- Keep a folder that a tool generates, such as a typed API client, as the tool writes it, and import from it. Treat it as generated code, and do not edit it.
 
 ```text
 src/
