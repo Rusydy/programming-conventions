@@ -1,6 +1,6 @@
 # Programming Conventions
 
-Sourced, opinionated conventions for writing **Bash, Go, Kotlin, Kotlin Multiplatform, Next.js, Python, Svelte, SvelteKit and TypeScript** code, and for the **infrastructure** that runs it: Linux servers, Docker, nginx and CI/CD.
+Sourced, opinionated conventions for writing **Bash, Go, Kotlin, Kotlin Multiplatform, Next.js, Python, Svelte, SvelteKit, TypeScript and Wails** code, and for the **infrastructure** that runs it: Linux servers, Docker, nginx and CI/CD.
 
 Each set starts from what the language, its compiler and its official tools already do. It adds configuration only where a default does not fit, and it records the reason. Where the official guides disagree, the notes say which source wins and why.
 
@@ -27,6 +27,7 @@ These are one developer's choices. The notes flag the places where they go beyon
 | Svelte | [`svelte-conventions/`](svelte-conventions/) | Svelte 5 in runes mode for plain Vite apps, such as a Wails frontend: project setup with `svelte-check`, ESLint and Prettier, layout and naming, runes and reactivity, components, props and snippets, events, bindings and attachments, state sharing and context, templates, styling and accessibility, errors and async, testing with Vitest Browser Mode, TypeScript in Svelte, modern Svelte by release |
 | SvelteKit | [`sveltekit-conventions/`](sveltekit-conventions/) | SvelteKit 3 applications on top of the Svelte set: setup with `sv` and `vite.config`, layout and routing, `load` and data fetching, form actions, state and navigation, hooks, errors and security, rendering, SEO and performance, testing, deployment with `adapter-node` behind nginx, TypeScript in SvelteKit, modern SvelteKit by release |
 | TypeScript | [`typescript-conventions/`](typescript-conventions/) | tsconfig, types and type design, validating external data, modules, naming, functions and async code, errors, testing, TypeScript in React, modern TypeScript by release |
+| Wails | [`wails-conventions/`](wails-conventions/) | Wails v3 desktop apps on top of the Go and Svelte sets: setup with the pinned CLI, project layout, application lifecycle, services and bindings, events and windows, the Svelte frontend, security, testing with a headless server build, build, signing and distribution, modern Wails by release |
 
 ## How each set is organized
 
@@ -64,11 +65,12 @@ Several ideas recur across the principles notes:
 - **Svelte:** the [principles note](svelte-conventions/01-principles-and-sources.md#decisions-to-review) lists nine decisions, such as kebab-case component files and reactive state in classes, each with the place to change it.
 - **SvelteKit:** the [principles note](sveltekit-conventions/01-principles-and-sources.md#decisions-to-review) lists eight decisions, such as `adapter-node` behind nginx and explicit `$types` annotations, each with the place to change it.
 - **TypeScript:** the [principles note](typescript-conventions/01-principles-and-sources.md#decisions-to-review) lists four decisions, such as Vitest beside `node:test` and `tsx` beside type stripping.
+- **Wails:** the [principles note](wails-conventions/01-principles-and-sources.md#decisions-to-review) lists eleven decisions, such as pinning the CLI with a `tool` directive, committing the generated bindings and registering events in `run` instead of `init()`, each with the place to change it.
 Read these as one developer's choices, not as consensus.
 
 ## Versions
 
-Version numbers in these notes are a snapshot from October 2026 (November 2026 for Kotlin Multiplatform, Svelte, SvelteKit and the infrastructure set). Each set says which versions it targets. Check the current release notes before you start a project, because version facts go stale quickly.
+Version numbers in these notes are a snapshot from October 2026 (November 2026 for Kotlin Multiplatform, Svelte, SvelteKit, Wails and the infrastructure set). Each set says which versions it targets. Check the current release notes before you start a project, because version facts go stale quickly.
 
 ## Sources
 
@@ -84,6 +86,7 @@ Each note ends with its sources and the date they were read. The main upstream g
 - **Svelte:** the [Svelte documentation](https://svelte.dev/docs/svelte), the [Svelte CLI documentation](https://svelte.dev/docs/cli) and the [eslint-plugin-svelte guide](https://sveltejs.github.io/eslint-plugin-svelte/).
 - **SvelteKit:** the [SvelteKit documentation](https://svelte.dev/docs/kit) and the [SvelteKit 3 migration guide](https://svelte.dev/docs/kit/migrating-to-sveltekit-3).
 - **TypeScript:** the [TypeScript Handbook](https://www.typescriptlang.org/docs/) and the [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html).
+- **Wails:** the [Wails documentation](https://wails.io/), read from the `docs/mpress/content` folder of the `wailsapp/wails` repository at the `v3.1.0` tag, and the [Wails v3 repository](https://github.com/wailsapp/wails).
 
 ## Contributing
 
