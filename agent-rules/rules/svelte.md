@@ -19,7 +19,7 @@ Write idiomatic Svelte 5 in runes mode. Follow the compiler, `svelte-check` and 
 - When sources disagree, the order is: the Svelte compiler and official documentation; this file and the notes; `svelte-check`, `eslint-plugin-svelte` and the typescript-eslint presets; the TypeScript notes for every question about TypeScript itself.
 - Svelte's required shape overrides the TypeScript notes in three places: a `.svelte` file is a default export, a component's props type is a local `Props` interface, and shared reactive state is a class.
 - If the repository documents its own conventions, follow them first. Generated files are exempt, such as the folder that Wails writes for Go bindings.
-- SvelteKit has its own notes (`sveltekit-conventions`, when it exists). This file covers a plain Vite app, such as a Wails frontend, which has no server rendering.
+- SvelteKit has its own notes and digest (`sveltekit.md`), which load next to this file. This file covers a plain Vite app, such as a Wails frontend, which has no server rendering.
 - Before you report Svelte changes as done, run `npm run check`, `npm run lint` and `npm test`. Before you use a newer feature, read the version: `node -p "require('svelte/package.json').version"`.
 
 ## Setup and tooling

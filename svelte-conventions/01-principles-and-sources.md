@@ -2,7 +2,7 @@
 
 ## Summary
 
-These principles apply to every Svelte 5 project that is not a SvelteKit application, such as a Vite single-page app or the frontend of a Wails desktop app. They put the Svelte compiler, `svelte-check` and the official Svelte documentation ahead of local configuration, so that any Svelte developer can read the code on the first day. The set adds to [typescript-conventions](../typescript-conventions/01-principles-and-sources.md) and never replaces it. SvelteKit has its own folder, which will build on this one.
+These principles apply to every Svelte 5 project that is not a SvelteKit application, such as a Vite single-page app or the frontend of a Wails desktop app. They put the Svelte compiler, `svelte-check` and the official Svelte documentation ahead of local configuration, so that any Svelte developer can read the code on the first day. The set adds to [typescript-conventions](../typescript-conventions/01-principles-and-sources.md) and never replaces it. SvelteKit has its own folder, [sveltekit-conventions](../sveltekit-conventions/01-principles-and-sources.md), which builds on this one.
 
 ## Rules
 
@@ -54,7 +54,7 @@ These choices were made while writing the notes, because the sources disagree or
 | --- | --- | --- |
 | `compilerOptions.runes: true` for the whole project | It makes the compiler reject Svelte 4 syntax, so new code cannot drift. It also applies to dependencies in `node_modules`. The Svelte documentation offers `dynamicCompileOptions` to skip them, but only the build applies it, so the setup note uses the function form of `runes` (5.54) instead. | [project setup](02-project-setup-and-tooling.md#svelte-configuration) |
 | kebab-case file names for components (`loan-row.svelte`) | The TypeScript notes use kebab-case for every file, and macOS and Windows file systems ignore case. The Svelte documentation and the `create-vite` template use UpperCamelCase (`Counter.svelte`). The import still names the component in UpperCamelCase, so the markup reads the same. | [naming](03-project-layout-and-naming.md#naming) |
-| The `@/` alias for `src/` | The TypeScript notes use `@/` for anything further than one folder away. SvelteKit fixes its alias as `$lib`, and its notes will use that. | [imports](03-project-layout-and-naming.md#exports-and-imports) |
+| The `@/` alias for `src/` | The TypeScript notes use `@/` for anything further than one folder away. SvelteKit 3 replaced `$lib` with the `#lib` subpath import, and its notes use that. | [imports](03-project-layout-and-naming.md#exports-and-imports) |
 | Local interface named `Props` | The Svelte documentation and `sv` templates use it. The React note names the interface after the component, which a `.svelte` file cannot export without `<script module>`. | [components](05-components-props-and-snippets.md#props) |
 | Callback props in `onSomething` camel case (`onSelect`) | It follows the TypeScript notes. A callback that mirrors a DOM event and spreads onto an element keeps the lowercase DOM name (`onclick`). | [components](05-components-props-and-snippets.md#callback-props) |
 | Reactive state in classes | The TypeScript notes allow a class only for an `Error` or an object that owns a resource. `$state` only works as a class field or a variable, and the Svelte documentation shows classes for shared state. The other class rules of the TypeScript notes still apply. | [state sharing](07-state-sharing-and-context.md#state-in-a-class) |
