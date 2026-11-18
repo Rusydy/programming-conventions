@@ -9,7 +9,7 @@ These principles apply to every Wails v3 desktop application: a Go program that 
 ### Principles
 
 1. **Write the backend as ordinary Go.** A Wails service is a normal Go type with normal methods. Follow every rule of the Go notes, including the named parameters and results, and let Wails generate the frontend API from that code ([services and bindings](05-services-and-bindings.md)).
-2. **Write the frontend as a plain Svelte app.** The frontend is a client-only Vite project with no server rendering, so the [Svelte notes](../svelte-conventions/01-principles-and-sources.md) apply and the SvelteKit notes do not.
+2. **Write the frontend as a plain Svelte app.** The frontend is a client-only Vite project with no server rendering, so the [Svelte notes](../svelte-conventions/01-principles-and-sources.md) apply and the SvelteKit notes do not. Svelte is the author's choice for Wails frontends. The React, Vue and vanilla templates work with Wails, and this set does not cover them.
 3. **Keep the domain out of the framework.** Business rules live in packages under `internal/` that do not import Wails. Only `main` and a thin layer of services touch `application` ([project layout](03-project-layout.md#where-code-lives)).
 4. **Let the bindings be the contract.** The frontend calls the backend through generated bindings and never through a hand-written bridge. Change the Go signature, regenerate and fix the compiler errors on the frontend side ([services and bindings](05-services-and-bindings.md#bindings)).
 5. **Validate on the Go side.** The frontend is not trusted. Check every argument of every bound method, because the webview can run any script that reaches it ([security](08-security.md)).
