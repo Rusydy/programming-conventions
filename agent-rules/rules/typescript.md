@@ -13,7 +13,7 @@ paths:
 ---
 # TypeScript conventions (every project)
 
-Write type-safe, readable TypeScript. Follow the compiler's, the toolchain's and the language's conventions instead of inventing configuration ("convention over configuration"). This file is a digest of the notes in the `typescript-conventions` folder of the programming-conventions repository, which hold the reasons, sources and checked examples. Read the matching note before a large change or when a rule here is unclear. The digest was synced with the notes on 2026-11-10; update it by hand whenever a note changes.
+Write type-safe, readable TypeScript. Follow the compiler's, the toolchain's and the language's conventions instead of inventing configuration ("convention over configuration"). This file is a digest of the notes in the `typescript-conventions` folder of the programming-conventions repository, which hold the reasons, sources and checked examples. Read the matching note before a large change or when a rule here is unclear. The digest was synced with the notes on 2026-11-19; update it by hand whenever a note changes.
 
 ## How to apply
 
@@ -55,7 +55,7 @@ Write type-safe, readable TypeScript. Follow the compiler's, the toolchain's and
 ## Linting and formatting
 
 - ESLint flat config: add typescript-eslint's `recommendedTypeChecked` and `stylisticTypeChecked`, set `parserOptions.projectService` to `true`, and set `@typescript-eslint/no-non-null-assertion` to `error`. Put `eslint-config-prettier/flat` last. A Next.js project keeps `eslint-config-next` before them; a project without Next.js starts from `js.configs.recommended`.
-- Do not use the `strict` presets.
+- Do not use the `strict` presets. Do not switch to Oxlint and Oxfmt (Oxc) on your own. Their type-aware rules cover 59 of 61 typescript-eslint ones, and for Svelte they skip templates and `.svelte` formatting. A trial on a plain TypeScript project, run beside ESLint, comes first. Vite, Vitest and Rolldown come with the frameworks and need no decision.
 - Disable a rule only with a comment that gives the reason. `@ts-ignore` and `@ts-nocheck` are banned; write `@ts-expect-error` with a description.
 - Format with Prettier 3 and its default options, with no config file, and never by hand. An existing project keeps its settings until its own move to Prettier 3.
 - To adopt the lint config in an existing project, run `npx eslint --fix --suppress-all`, commit the `eslint-suppressions.json` it writes, and run `npx eslint --prune-suppressions` after each clean-up. ESLint suppresses only rules set to `error`.

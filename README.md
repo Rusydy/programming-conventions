@@ -64,7 +64,7 @@ Several ideas recur across the principles notes:
 - **Next.js:** the [principles note](nextjs-conventions/01-principles-and-sources.md#decisions-to-review) lists six decisions, such as Tailwind CSS before CSS Modules, each with the reason the built-in does not do the job.
 - **Svelte:** the [principles note](svelte-conventions/01-principles-and-sources.md#decisions-to-review) lists nine decisions, such as kebab-case component files and reactive state in classes, each with the place to change it.
 - **SvelteKit:** the [principles note](sveltekit-conventions/01-principles-and-sources.md#decisions-to-review) lists eight decisions, such as `adapter-node` behind nginx and explicit `$types` annotations, each with the place to change it.
-- **TypeScript:** the [principles note](typescript-conventions/01-principles-and-sources.md#decisions-to-review) lists four decisions, such as Vitest beside `node:test` and `tsx` beside type stripping.
+- **TypeScript:** the [principles note](typescript-conventions/01-principles-and-sources.md#decisions-to-review) lists five decisions, such as Vitest beside `node:test`, `tsx` beside type stripping and ESLint beside Oxlint.
 - **Wails:** the [principles note](wails-conventions/01-principles-and-sources.md#decisions-to-review) lists eleven decisions, such as pinning the CLI with a `tool` directive, committing the generated bindings and registering events in `run` instead of `init()`, each with the place to change it.
 Read these as one developer's choices, not as consensus.
 

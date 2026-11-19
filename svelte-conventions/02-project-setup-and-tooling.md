@@ -141,6 +141,7 @@ export default defineConfig([
 
 - Put `prettier` and `svelte.configs.prettier` last, so that ESLint and Prettier do not fight.
 - Do not use the `strict` typescript-eslint presets, as the TypeScript notes say.
+- Do not replace ESLint and Prettier with Oxlint and Oxfmt. Oxlint checks only the `<script>` blocks of a `.svelte` file, so it skips the template rules above, and Oxfmt cannot format `.svelte` files ([decisions in the TypeScript notes](../typescript-conventions/01-principles-and-sources.md#decisions-to-review)).
 - `svelte.configs.recommended` reports `svelte/require-each-key`, `svelte/prefer-writable-derived`, `svelte/prefer-svelte-reactivity` (a plain `Set` or `Map` in state) and `svelte/no-at-html-tags`. Disable one only with a comment that gives the reason.
 - The linter cannot infer the type of a snippet parameter or a function binding setter from the component that receives it. It sees `any` and reports `no-unsafe-member-access` or `no-unsafe-assignment`. Annotate the parameter: `{#snippet actions(item: Loan)}` and `(next: string) => (first = next)`. `svelte-check` infers both and needs no annotation.
 - Use `<!-- svelte-ignore code (reason) -->` only for a warning that is wrong in your case, and always give the reason in parentheses.
