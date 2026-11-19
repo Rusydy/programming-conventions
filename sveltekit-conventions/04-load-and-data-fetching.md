@@ -20,13 +20,14 @@ Load a page's data in `+page.server.ts` and type the function with the generated
 // src/routes/loans/[loanId=uuid]/+page.server.ts
 import { error } from "@sveltejs/kit";
 
+import { HTTP_STATUS } from "#lib/http-status.ts";
 import { findLoan } from "#lib/server/loans.ts";
 
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = ({ params }) => {
   const loan = findLoan(params.loanId);
-  if (!loan) error(404, "Loan not found");
+  if (!loan) error(HTTP_STATUS.notFound, "Loan not found");
   return { loan };
 };
 ```
@@ -92,9 +93,10 @@ export const load: PageServerLoad = ({ locals }) => {
 
 ### Errors and redirects
 
+- Name every status with a constant from `HTTP_STATUS`, as the [TypeScript notes](../typescript-conventions/09-error-handling.md#status-codes) say, and never write a bare number.
 - Call `error(status, message)` to stop a load with an expected failure, such as a missing record, and `redirect(status, location)` to send the user elsewhere. Neither returns, so do not write `return error(...)`.
 - Do not call either inside a `try` block, because the `catch` would intercept them. If you must catch around such a call, rethrow with `isHttpError` or `isRedirect` from `@sveltejs/kit`.
-- Use `303` for a redirect after a form `POST`, and `301` or `308` only for a permanent move.
+- Use `HTTP_STATUS.seeOther` (303) for a redirect after a form `POST`, and `HTTP_STATUS.movedPermanently` (301) or `HTTP_STATUS.permanentRedirect` (308) only for a permanent move.
 - Do not return a value that means "not found". Throw the error, so that the nearest `+error.svelte` renders it.
 
 ### Rerunning

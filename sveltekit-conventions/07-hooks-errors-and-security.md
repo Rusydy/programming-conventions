@@ -38,11 +38,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 ```ts
 // src/lib/server/auth.ts
 import { redirect } from "@sveltejs/kit";
+import { HTTP_STATUS } from "#lib/http-status.ts";
 import { getRequestEvent } from "$app/server";
 
 export function requireUser() {
   const { locals } = getRequestEvent();
-  if (!locals.user) redirect(303, "/login");
+  if (!locals.user) redirect(HTTP_STATUS.seeOther, "/login");
   return locals.user;
 }
 ```
@@ -69,7 +70,7 @@ export const handleError: HandleServerError = ({ kind, error, event }) => {
 ```
 
 - Do not log `framework` errors, such as every 404: they are routine. Do not return the message of an unknown error, a stack or a query. Return a status in the result only when you need a different one.
-- `App.Error` always has `status` and `message`. Add fields in `src/app.d.ts`, and give an `error()` call the extra properties as its third argument: `error(409, "Loan already paid", { code: "LOAN_PAID" })`. The second argument must be a string in SvelteKit 3.
+- `App.Error` always has `status` and `message`. Add fields in `src/app.d.ts`, and give an `error()` call the extra properties as its third argument: `error(HTTP_STATUS.conflict, "Loan already paid", { code: "LOAN_PAID" })`. The second argument must be a string in SvelteKit 3.
 - Render an error with `+error.svelte`, reading `page.status` and `page.error` from `$app/state`. Write a generic message for status 500, and show `page.error.message` only for expected errors. Keep a `src/error.html` for the case where nothing else can render.
 - Use `<svelte:boundary>` with a `failed` snippet for a part of a page that can fail on its own ([Svelte errors](../svelte-conventions/09-errors-and-async.md#error-boundaries)).
 - Catch errors in an action or an endpoint only to turn them into a `fail()` result or a status. Do not catch an `error()` or a `redirect()` call, and rethrow them with `isHttpError` and `isRedirect` if you must.
@@ -120,5 +121,5 @@ Pages read on 2026-11-18:
 - [Errors](https://svelte.dev/docs/kit/errors): expected and unexpected errors, `error()`, `handleError`, `+error.svelte` resolution, `src/error.html`, `App.Error`. [Loading data](https://svelte.dev/docs/kit/load): the parallel run of all load functions on a page.
 - [Environment variables](https://svelte.dev/docs/kit/environment-variables): `src/env.ts`, `defineEnvVars`, private and public, Standard Schema or a function, static and dynamic, the `building` flag, the deprecation of `$env/*` and `$app/environment`. [`$app/env`](https://svelte.dev/docs/kit/$app-env): `browser`, `building`, `dev`, `version`. [Server-only modules](https://svelte.dev/docs/kit/server-only-modules): `$app/env/private` and `$app/server` are server-only.
 - [Configuration](https://svelte.dev/docs/kit/configuration): `csp` modes and `reportOnly`, `csrf.trustedOrigins`. [Migrating to SvelteKit 3](https://svelte.dev/docs/kit/migrating-to-sveltekit-3): CSRF always on, rejecting mutating requests without a `Content-Type`, cookie v2, hook types moved to `@sveltejs/kit/hooks`, the `error()` signature, `handleError` receives every error, `handleValidationError` removed.
-- Checked on 2026-11-18 in the sample application of the [principles note](01-principles-and-sources.md#sources-and-raw-notes): `hooks.server.ts` with `handle` and `handleError`, `src/env.ts` with a private and a public variable, `app.d.ts` with `Locals` and `Error`, and the `requireUser` helper with `getRequestEvent` passed `svelte-check`, ESLint and Prettier. Typing `handleError` as `({ error, event, status })` failed `svelte-check`, because the input has `kind`, `error` and `event` and no `status`. The built server, started without `.env`, stopped with `SvelteKit error: env_invalid` and named `DATABASE_URL`, and ran with `node --env-file=.env build`. A `POST` without an `Origin` header and one from `http://evil.example` got 403. A request without a session cookie for a page that calls `redirect(303, "/login")` got `303`.
+- Checked on 2026-11-18 in the sample application of the [principles note](01-principles-and-sources.md#sources-and-raw-notes): `hooks.server.ts` with `handle` and `handleError`, `src/env.ts` with a private and a public variable, `app.d.ts` with `Locals` and `Error`, and the `requireUser` helper with `getRequestEvent` passed `svelte-check`, ESLint and Prettier. Typing `handleError` as `({ error, event, status })` failed `svelte-check`, because the input has `kind`, `error` and `event` and no `status`. The built server, started without `.env`, stopped with `SvelteKit error: env_invalid` and named `DATABASE_URL`, and ran with `node --env-file=.env build`. A `POST` without an `Origin` header and one from `http://evil.example` got 403. A request without a session cookie for a page that calls `redirect(HTTP_STATUS.seeOther, "/login")` got `303`.
 - The cookie attributes, the choice of database sessions, the CSP starting point and the proxy header advice come from the documentation, the infrastructure notes and general practice. The sample application did not set a cookie or a `csp`, so those examples were not run. The `handle` example calls `findUserBySession`, a function that you write, and the sample application's hook reads the cookie directly, so that example shows a shape and was not run. `requireUser` ran in the sample application, called from a server `load` and from an action.

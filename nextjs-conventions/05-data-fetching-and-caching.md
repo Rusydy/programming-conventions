@@ -60,6 +60,7 @@ export async function getFaqs() {
 // app/api/revalidate/route.ts
 import { revalidateTag } from 'next/cache'
 import { timingSafeEqual } from 'node:crypto'
+import { HTTP_STATUS } from '@/lib/http-status'
 
 export async function POST(request: Request) {
   const received = Buffer.from(request.headers.get('x-revalidate-token') ?? '')
@@ -68,7 +69,7 @@ export async function POST(request: Request) {
     expected.length > 0 &&
     received.length === expected.length &&
     timingSafeEqual(received, expected)
-  if (!authorised) return new Response('Unauthorized', { status: 401 })
+  if (!authorised) return new Response('Unauthorized', { status: HTTP_STATUS.unauthorized })
 
   revalidateTag('faq', 'max')
   return Response.json({ revalidated: true })
@@ -104,3 +105,4 @@ Pages read on 2026-10-26:
 - [Route Handlers](https://nextjs.org/docs/app/getting-started/route-handlers) and [Data security](https://nextjs.org/docs/app/guides/data-security) (Data Access Layer).
 - Verified in a scratch build: with the nonce CSP in the root layout, every page is `ƒ` (dynamic).
 - Pages read on 2026-11-10: [Fetching data](https://nextjs.org/docs/app/getting-started/fetching-data) (updated 2026-09-01). It lists the `use()` option first for client components and says SWR and React Query have their own caching semantics.
+- On 2026-11-19 the revalidation Route Handler above was changed to name its status with `HTTP_STATUS` from `@/lib/http-status` (the table of the [TypeScript status codes](../typescript-conventions/09-error-handling.md#status-codes)). That one block was not compiled again.

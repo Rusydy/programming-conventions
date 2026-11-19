@@ -81,7 +81,7 @@ describe("createLoan", () => {
 
 - When a test must call a `load` function or an action directly, build the event with only the fields that the function reads, and write one cast with a comment that says what is left out (`{ locals } as unknown as RequestEvent`), as the [TypeScript notes](../typescript-conventions/10-testing.md#test-doubles) allow.
 - A server module that reads `$app/env/private` or calls `getRequestEvent()` needs those values supplied. Pass the data as an argument where you can, and mock the module only at its boundary. `getRequestEvent()` throws outside a request, so a function that calls it, such as `requireUser()`, cannot run in a plain unit test.
-- Test that an action returns `fail(422, ...)` with the right field errors for each invalid case, and that it requires a user. These are the rules that regress.
+- Test that an action returns `fail(HTTP_STATUS.unprocessable, ...)` with the right field errors for each invalid case, and that it requires a user. These are the rules that regress.
 - Reset module-level state, such as an in-memory store, in `beforeEach`.
 
 ### Component tests

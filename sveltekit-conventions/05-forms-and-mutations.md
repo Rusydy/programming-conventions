@@ -12,7 +12,7 @@ Change data with a form action in `+page.server.ts`, and submit it from a real `
 - Use one `default` action when a page has one form. Use named actions (`?/archive`) when it has several, and do not mix `default` with named actions on one page: the `?/name` query string stays in the URL, and the next default `POST` would hit the named action.
 - Read the fields with `await request.formData()`, assign the result to an `unknown` variable at once, and validate it with a Zod `safeParse`, as the [TypeScript notes](../typescript-conventions/05-runtime-validation-and-external-data.md#forms-and-user-input) require. `Object.fromEntries(formData)` is `unknown` data until a schema accepts it.
 - Return a validation failure with `fail(status, data)`. Use `422` for invalid fields and `400` for a malformed request. The data reaches the page as the `form` prop. Return the field errors with `z.flattenError(error).fieldErrors`, and return the field values the user typed so that the form can show them again. Never return a password, a token or any other secret.
-- Return plain, serialisable data from a successful action, and redirect with `redirect(303, location)` when the result is a different page. A `POST` that ends in a redirect cannot be repeated by a refresh.
+- Return plain, serialisable data from a successful action, and redirect with `redirect(HTTP_STATUS.seeOther, location)` when the result is a different page. A `POST` that ends in a redirect cannot be repeated by a refresh.
 - Do not catch a `redirect` or an `error`. If you wrap an action's body in `try`, rethrow with `isRedirect` and `isHttpError` from `@sveltejs/kit`.
 - Check the user inside the action, with the same `requireUser()` helper as in `load`. A form action is a public endpoint, and a page's `load` check does not cover it ([authorisation](07-hooks-errors-and-security.md#authentication-and-authorisation)).
 - Keep a money amount as an integer count of minor units with a currency code, and validate it as one, as the [TypeScript notes](../typescript-conventions/01-principles-and-sources.md) say for money. The sample action above stores `amountMinor`.
@@ -24,6 +24,7 @@ Change data with a form action in `+page.server.ts`, and submit it from a real `
 import { fail } from "@sveltejs/kit";
 import { z } from "zod";
 
+import { HTTP_STATUS } from "#lib/http-status.ts";
 import { requireUser } from "#lib/server/auth.ts";
 import { createLoan, listLoans } from "#lib/server/loans.ts";
 
@@ -45,7 +46,7 @@ export const actions: Actions = {
     const raw: unknown = Object.fromEntries(await request.formData());
     const result = schema.safeParse(raw);
     if (!result.success) {
-      return fail(422, { errors: z.flattenError(result.error).fieldErrors });
+      return fail(HTTP_STATUS.unprocessable, { errors: z.flattenError(result.error).fieldErrors });
     }
     createLoan({
       borrower: result.data.borrower,

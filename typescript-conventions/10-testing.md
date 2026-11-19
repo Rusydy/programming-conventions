@@ -43,7 +43,7 @@ The examples in this section and the next two use Vitest.
 - Name a `describe` block after the unit and an `it` block as a sentence about its behaviour.
 - Write a table with `it.each` when the cases share their logic. Give the table an `interface`, so that each case is type-checked, and put a `name` in every case.
 - Build fixtures with a typed helper that takes `Partial<T>` overrides, and not with copies of a literal. The compiler then reports a fixture that no longer matches the type.
-- Assert an error by its class and data, not by its message: `await expect(getLoan("missing")).rejects.toMatchObject({ status: 404 })` ([custom errors](09-error-handling.md#custom-errors)).
+- Assert an error by its class and data, not by its message: `await expect(getLoan("missing")).rejects.toMatchObject({ status: HTTP_STATUS.notFound })` ([custom errors](09-error-handling.md#custom-errors)).
 - Control time with `vi.useFakeTimers()`, and restore it in `afterEach`. Never wait with a real `setTimeout`.
 - Test your own logic and your own types. Do not test what a library or the framework already guarantees.
 

@@ -93,7 +93,7 @@ export const params = defineParams({
 - Apply it in the folder name: `src/routes/items/[id=uuid]/`. A matcher can also be a Standard Schema validator, such as a Zod schema, whose output extends `string`, `boolean`, `number` or `bigint`.
 - A matcher runs on the server and in the browser, so it must not use a server-only module.
 - Keep a matcher's transformation symmetrical, so that `resolve()` can build the path back.
-- Avoid `[...rest]` and `[[optional]]` unless the URL design needs them. `[...rest]` also matches zero segments, so validate it. A catch-all `[...path]` that calls `error(404)` is the way to render a nested not-found page.
+- Avoid `[...rest]` and `[[optional]]` unless the URL design needs them. `[...rest]` also matches zero segments, so validate it. A catch-all `[...path]` that calls `error(HTTP_STATUS.notFound)` is the way to render a nested not-found page.
 - Use a route group in parentheses to give a set of routes a layout without a URL segment. Use `+page@` to reset to the root layout only when a page truly needs none of the layouts above it.
 - Build every internal link with `resolve()` ([state and navigation](06-state-and-navigation.md#navigation)).
 

@@ -159,7 +159,7 @@ Write type-safe, readable TypeScript. Follow the compiler's, the toolchain's and
 - In `catch (error)` the value is `unknown`. Narrow it with `instanceof Error`, or convert it with a `toError` helper. Do not annotate it with `any`.
 - Catch only what the code can handle. Do not catch an error only to log it and throw it again. Keep the `try` block to the statements that can throw. Never leave a `catch` empty; when ignoring the error is correct, say why in a comment inside the block.
 - At a boundary (a Route Handler, a Server Function, a script's `main` function or an error boundary), log the error once, with its whole `cause` chain. Return a client-safe message; never send the `message` of an unexpected error to the client.
-- A new Route Handler returns errors as RFC 9457 problem details: `application/problem+json` with `title`, `status` and `detail`. An existing API keeps its body, and a published body changes only with a new API version.
+- A new Route Handler returns errors as RFC 9457 problem details: `application/problem+json` with `title`, `status` and `detail`. An existing API keeps its body, and a published body changes only with a new API version. Name every status with `HTTP_STATUS.notFound`, `HTTP_STATUS.seeOther` and so on, never a bare number, in `error`, `redirect`, `fail`, `Response.json` and test assertions: one `lib/http-status.ts` with an `as const` table of only the codes in use and `type HttpStatus = (typeof HTTP_STATUS)[keyof typeof HTTP_STATUS]` for parameters; no `enum`, no `node:http2` constants (`node:http` has only `STATUS_CODES`), no package.
 - The Next.js `error.tsx` boundary receives an `unknown` error. Narrow it before use.
 
 ## Testing
@@ -170,7 +170,7 @@ Write type-safe, readable TypeScript. Follow the compiler's, the toolchain's and
 - Include the test files in `tsconfig.json`, so that a type error in a test fails the build. The test script is `"test": "vitest run"`, or `"test": "node --test"` in a `node:test` project.
 - Name a `describe` block after the unit, and an `it` block as a sentence about its behaviour. Use `it.each` when cases share their logic: give the table an `interface`, and put a `name` in every case.
 - Build fixtures with a typed helper that takes `Partial<T>` overrides, such as `buildLoan(overrides: Partial<Loan> = {})`, not with copies of a literal.
-- Assert an error by its class and data, not by its message: `rejects.toMatchObject({ status: 404 })`.
+- Assert an error by its class and data, not by its message: `rejects.toMatchObject({ status: HTTP_STATUS.notFound })`.
 - Control time with `vi.useFakeTimers()`, and restore it in `afterEach`. Never wait on a real `setTimeout`.
 - Test your own logic and your own types, not what a library or the framework already guarantees.
 - Prefer the real implementation when it is cheap. Give a double the type of what it replaces: pass a typed implementation to `vi.fn`. When a test needs part of a large dependency, write one cast with a comment that says what is left out (`{ fetchLoans } as unknown as LoanApi`). Do not use `any` in tests; when it is unavoidable, disable `no-explicit-any` on that line with a reason. Mock a module with `vi.mock` only at a boundary: the network, the clock or the file system.

@@ -32,7 +32,7 @@ Replace the old form in the lines you change, and leave the rest of the file alo
 | `import type { Handle } from "@sveltejs/kit"` | `import type { Handle } from "@sveltejs/kit/hooks"` |
 | `json(value)` and `text(value)` helpers | `Response.json(value)` and `new Response(text)` |
 | `handleValidationError` | `handleError` with `kind: "validation"` |
-| `error(404, { message })` with a non-string second argument | `error(404, "message", { code })` |
+| `error(HTTP_STATUS.notFound, { message })` with a non-string second argument | `error(HTTP_STATUS.notFound, "message", { code })` |
 | `csrf: { checkOrigin: false }` | `csrf: { trustedOrigins: [...] }` |
 | `src/params/uuid.ts` files | One `src/params.ts` with `defineParams` |
 | `$service-worker` | `$app/manifest`, `$app/env` and `$app/paths` |

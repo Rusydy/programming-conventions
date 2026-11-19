@@ -24,7 +24,7 @@ SvelteKit generates the types of every route into `./$types`. Import them and an
 - Type page props with `PageProps` and `LayoutProps` (SvelteKit 2.16 and later): `let { data, form }: PageProps = $props();`. Do not write `PageData` and `ActionData` by hand, which is the older form.
 - `PageProps` requires `params` as well as `data` and `form`, so a component test passes `params: {}` ([testing](09-testing-and-quality-gates.md#component-tests)).
 - Let the return type of `load` be inferred. A type written by hand drifts from what the function returns, and `data` in the page already has the inferred type.
-- Type an action's result by inference too. The `form` prop is the union of what the actions return, so `fail(422, { errors })` makes `form.errors` available, and reading it needs `form?.errors`.
+- Type an action's result by inference too. The `form` prop is the union of what the actions return, so `fail(HTTP_STATUS.unprocessable, { errors })` makes `form.errors` available, and reading it needs `form?.errors`.
 - Use `satisfies` for a value that must match a type and keep its own, as in the TypeScript notes. Do not use `as` on route data.
 
 ### app.d.ts
