@@ -2,7 +2,7 @@
 
 ## Summary
 
-These principles apply to every Vue 3 project that is not a Nuxt application, such as a Vite single-page app, or a frontend that another host embeds. They put the Vue compiler, `vue-tsc` and the official Vue documentation and style guide ahead of local configuration, so that any Vue developer can read the code on the first day. The set adds to [typescript-conventions](../typescript-conventions/01-principles-and-sources.md) and never replaces it. Nuxt will get its own folder, which builds on this one.
+These principles apply to every Vue 3 project that is not a Nuxt application, such as a Vite single-page app, or a frontend that another host embeds. They put the Vue compiler, `vue-tsc` and the official Vue documentation and style guide ahead of local configuration, so that any Vue developer can read the code on the first day. The set adds to [typescript-conventions](../typescript-conventions/01-principles-and-sources.md) and never replaces it. Nuxt has its own folder, [nuxt-conventions](../nuxt-conventions/01-principles-and-sources.md), which builds on this one.
 
 ## Rules
 
@@ -49,7 +49,7 @@ Vue's required shape overrides the TypeScript notes for the code that Vue dictat
 - **Generated code** is exempt: any file that a tool writes, such as `typed-router.d.ts`, `components.d.ts` and a generated API client.
 - **Shared and team repositories:** when a repository documents its own conventions, follow those first, and apply these notes to the code you write where the repository is silent.
 - **Client-only hosts:** when a desktop shell or another host embeds the frontend, it is a client-only Vite project, so there is no server rendering. Every rule here applies, and the notes about server-side state sharing do not.
-- **Nuxt:** a Nuxt app follows these notes for components, reactivity, composables and TypeScript, and the Nuxt notes for everything that Nuxt owns, such as routing, data fetching and auto-imports. Nuxt notes are not written yet, so follow the Nuxt documentation where this set is silent.
+- **Nuxt:** a Nuxt app follows these notes for components, reactivity, composables and TypeScript, and the [Nuxt notes](../nuxt-conventions/01-principles-and-sources.md) for everything that Nuxt owns: directories, auto-imports, routing, data fetching, the server, rendering and deployment.
 
 ### Decisions to review
 

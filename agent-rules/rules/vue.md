@@ -13,7 +13,7 @@ Write idiomatic Vue 3 with `<script setup lang="ts">`. Follow the compiler, `vue
 - When sources disagree, the order is: the Vue compiler, runtime and official documentation; this file and the notes; `vue-tsc`, `eslint-plugin-vue` and the typescript-eslint presets; the Vue style guide; the TypeScript notes for every question about TypeScript itself.
 - Vue's required shape overrides the TypeScript notes in five places: a `.vue` file is a default export; a component's props type is a local `Props` interface; `defineEmits` takes a type literal; a template event handler may be `async`; `v-model` events are named `update:x`.
 - If the repository documents its own conventions, follow them first. Generated files are exempt (`typed-router.d.ts`, `components.d.ts`, a generated API client).
-- Nuxt will have its own notes. Until then, follow these for components, reactivity, composables and TypeScript, and the Nuxt documentation for what Nuxt owns.
+- A Nuxt app has its own notes and digest (`nuxt.md`), which load next to this file. Follow this file for components, reactivity, composables and TypeScript, and `nuxt.md` for what Nuxt owns.
 - A composable or a store is a plain `.ts` file and loads only `typescript.md`; read this file first when you change one.
 - Before you report Vue changes as done, run `npm run check`, `npm run lint` and `npm test`. Before you use a newer feature, read the version: `node -p "require('vue/package.json').version"`.
 

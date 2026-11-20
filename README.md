@@ -1,6 +1,6 @@
 # Programming Conventions
 
-Sourced, opinionated conventions for writing **Bash, Go, Kotlin, Kotlin Multiplatform, Next.js, Python, Svelte, SvelteKit, TypeScript, Vue and Wails** code, and for the **infrastructure** that runs it: Linux servers, Docker, nginx and CI/CD.
+Sourced, opinionated conventions for writing **Bash, Go, Kotlin, Kotlin Multiplatform, Next.js, Nuxt, Python, Svelte, SvelteKit, TypeScript, Vue and Wails** code, and for the **infrastructure** that runs it: Linux servers, Docker, nginx and CI/CD.
 
 Each set starts from what the language, its compiler and its official tools already do. It adds configuration only where a default does not fit, and it records the reason. Where the official guides disagree, the notes say which source wins and why.
 
@@ -23,6 +23,7 @@ These are one developer's choices. The notes flag the places where they go beyon
 | Kotlin | [`kotlin-conventions/`](kotlin-conventions/) | Gradle and static checks, packages, naming, idiomatic use, null safety and types, API design, errors, coroutines and Flow, testing, platform practices (Android, Compose, multiplatform, Spring), modern Kotlin by release |
 | Kotlin Multiplatform | [`kmp-conventions/`](kmp-conventions/) | The multiplatform layer on top of the Kotlin set: project setup with the Android-KMP library plugin, module structure and source sets, `expect`/`actual` and platform code, dependencies, architecture and navigation, Compose Multiplatform, concurrency and the iOS boundary, testing and CI, modern Kotlin Multiplatform by release |
 | Next.js | [`nextjs-conventions/`](nextjs-conventions/) | App Router projects: routing, Server and Client Components, data fetching and caching, forms, errors and loading, metadata, styling and assets, security, testing, deployment and self-hosting, version policy |
+| Nuxt | [`nuxt-conventions/`](nuxt-conventions/) | Nuxt 4 applications on top of the Vue set: setup with `create-nuxt`, `nuxt typecheck`, `@nuxt/eslint` and Prettier, the `app/`, `server/` and `shared/` layout and auto-imports, pages, layouts and middleware, data fetching with `useFetch`, server routes with Zod validation, state and runtime configuration, errors and security, rendering modes, SEO and performance, testing with `@nuxt/test-utils`, deployment with the `node-server` preset behind nginx, TypeScript in Nuxt, modern Nuxt by release |
 | Python | [`python-conventions/`](python-conventions/) | Tooling with uv, Ruff, mypy and pytest, project layout, naming and style, idiomatic use, types and data modeling, API and class design, errors and logging, concurrency and async, testing, security and dependencies, platform practices (scripts and Django), modern Python by release |
 | Svelte | [`svelte-conventions/`](svelte-conventions/) | Svelte 5 in runes mode for plain Vite apps, such as a Wails frontend: project setup with `svelte-check`, ESLint and Prettier, layout and naming, runes and reactivity, components, props and snippets, events, bindings and attachments, state sharing and context, templates, styling and accessibility, errors and async, testing with Vitest Browser Mode, TypeScript in Svelte, modern Svelte by release |
 | SvelteKit | [`sveltekit-conventions/`](sveltekit-conventions/) | SvelteKit 3 applications on top of the Svelte set: setup with `sv` and `vite.config`, layout and routing, `load` and data fetching, form actions, state and navigation, hooks, errors and security, rendering, SEO and performance, testing, deployment with `adapter-node` behind nginx, TypeScript in SvelteKit, modern SvelteKit by release |
@@ -59,6 +60,7 @@ Several ideas recur across the principles notes:
 
 - **Go:** [named parameters and results](golang-conventions/02-named-parameters-and-results.md) is a labelled personal override. It names every parameter and result, and the note says it deviates on purpose from the Go team's guidance on unnamed results.
 - **Bash:** the [principles note](bash-conventions/01-principles-and-sources.md#decisions-to-review) lists the decisions made where the sources disagree, and the place to change each one.
+- **Nuxt:** the [principles note](nuxt-conventions/01-principles-and-sources.md#decisions-to-review) lists fifteen decisions, such as auto-imports on, `await useFetch` at the top of `<script setup>`, handlers that import from `nuxt/server`, and tests under `test/` with the Nuxt environment instead of Browser Mode, each with the place to change it.
 - **Python:** the [principles note](python-conventions/01-principles-and-sources.md#decisions-to-review) lists twelve decisions made where the sources disagree or leave a choice open, such as an 88-column line length instead of PEP 8's 79.
 - **Infrastructure:** the [principles note](infra-conventions/01-principles-and-sources.md#decisions-to-review) lists sixteen decisions, such as nginx on the host before nginx in Compose, Debian slim before Alpine, and the starting rate limits and alert thresholds, each with the place to change it.
 - **Kotlin Multiplatform:** the [principles note](kmp-conventions/01-principles-and-sources.md#decisions-to-review) lists eleven decisions, such as keeping Gradle while Kotlin Toolchain is Alpha.
@@ -72,7 +74,7 @@ Read these as one developer's choices, not as consensus.
 
 ## Versions
 
-Version numbers in these notes are a snapshot from October 2026 (November 2026 for Kotlin Multiplatform, Svelte, SvelteKit, Vue, Wails and the infrastructure set). Each set says which versions it targets. Check the current release notes before you start a project, because version facts go stale quickly.
+Version numbers in these notes are a snapshot from October 2026 (November 2026 for Kotlin Multiplatform, Nuxt, Svelte, SvelteKit, Vue, Wails and the infrastructure set). Each set says which versions it targets. Check the current release notes before you start a project, because version facts go stale quickly.
 
 ## Sources
 
@@ -84,6 +86,7 @@ Each note ends with its sources and the date they were read. The main upstream g
 - **Kotlin:** the [Kotlin coding conventions](https://kotlinlang.org/docs/coding-conventions.html), the [Android Kotlin style guide](https://developer.android.com/kotlin/style-guide) and the [library authors' guidelines](https://kotlinlang.org/docs/api-guidelines-introduction.html).
 - **Kotlin Multiplatform:** the [Kotlin Multiplatform documentation](https://kotlinlang.org/docs/multiplatform/get-started.html), the [Compose Multiplatform compatibility page](https://kotlinlang.org/docs/multiplatform/compose-compatibility-and-versioning.html) and the [Android-KMP library plugin](https://developer.android.com/kotlin/multiplatform/plugin).
 - **Next.js:** the [Next.js documentation](https://nextjs.org/docs) and the [support policy](https://nextjs.org/support-policy).
+- **Nuxt:** the [Nuxt documentation](https://nuxt.com/docs), read from the `docs` folder of the `nuxt/nuxt` repository, and the [Nuxt releases](https://github.com/nuxt/nuxt/releases).
 - **Python:** [PEP 8](https://peps.python.org/pep-0008/) and [PEP 257](https://peps.python.org/pep-0257/), the [Python Developer's Guide](https://devguide.python.org/versions/), and the documentation of [uv](https://docs.astral.sh/uv/), [Ruff](https://docs.astral.sh/ruff/), [mypy](https://mypy.readthedocs.io/) and [pytest](https://docs.pytest.org/).
 - **Svelte:** the [Svelte documentation](https://svelte.dev/docs/svelte), the [Svelte CLI documentation](https://svelte.dev/docs/cli) and the [eslint-plugin-svelte guide](https://sveltejs.github.io/eslint-plugin-svelte/).
 - **SvelteKit:** the [SvelteKit documentation](https://svelte.dev/docs/kit) and the [SvelteKit 3 migration guide](https://svelte.dev/docs/kit/migrating-to-sveltekit-3).
