@@ -10,6 +10,7 @@ Before you write or change code in one of these languages, or the infrastructure
 - TypeScript (`*.ts`, `*.tsx`, `*.mts`, `*.cts`, `tsconfig.json`): `~/.claude/rules/typescript.md`
 - Svelte (`*.svelte`, `*.svelte.ts`, `svelte.config.js`): `~/.claude/rules/svelte.md`, together with `typescript.md`
 - SvelteKit (`src/routes/**`, `src/hooks.*.ts`, `src/env.ts`, `src/params.ts`, `src/lib/server/**`): `~/.claude/rules/sveltekit.md`, together with `svelte.md` and `typescript.md`
+- Vue (`*.vue`, and a composable, store or router file in a project that depends on `vue`): `~/.claude/rules/vue.md`, together with `typescript.md`
 - Wails (a project with `build/config.yml` and a `frontend/` folder; Go services, `main.go`, `frontend/bindings`): `~/.claude/rules/wails.md`, together with `golang.md`, and `svelte.md` and `typescript.md` for `frontend/`
 - Next.js: follow the bundled docs in `node_modules/next/dist/docs/` when the project has them, and the `nextjs-conventions` folder of the programming-conventions repository.
 - Infrastructure (Dockerfiles, Compose files, nginx and CI configuration, systemd units, SSH, fail2ban and Docker daemon settings, runbooks, deploy and backup scripts): `~/.claude/rules/infra.md`, together with `bash.md` for scripts
